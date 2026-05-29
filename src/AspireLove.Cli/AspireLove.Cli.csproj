@@ -11,14 +11,14 @@
     <!-- "Aspire" (no dot) is a NuGet prefix reserved by Microsoft, so the package can't be "aspire.love".
          The brand stays aspire.love; the NuGet listing id is the mirrored "love.aspire". -->
     <PackageId>love.aspire</PackageId>
-    <Version>0.0.4</Version>
+    <Version>0.0.5</Version>
     <Authors>Florian Gilde</Authors>
     <Company>gilde.org</Company>
     <Description>Make Lovable projects independent of Lovable/Supabase cloud by generating a local .NET Aspire AppHost.</Description>
     <PackageTags>aspire;supabase;lovable;dotnet-tool</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>icon.png</PackageIcon>
-    <PackageProjectUrl>https://github.com/fgilde/aspire.love</PackageProjectUrl>
+    <PackageProjectUrl>https://www.aspire.love</PackageProjectUrl>
     <RepositoryUrl>https://github.com/fgilde/aspire.love</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
