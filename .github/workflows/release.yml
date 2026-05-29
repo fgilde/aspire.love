@@ -14,20 +14,25 @@ on:
 jobs:
   release:
     name: Pack the CLI tool & publish the desktop app
-    # Windows so we can build the WPF desktop app; the CLI packs fine here too.
-    runs-on: windows-latest
+    # Pinned (windows-latest is being redirected to windows-2025 anyway) and Windows so we can
+    # build the WPF desktop app; the CLI packs fine here too.
+    runs-on: windows-2025
+
+    # Opt every JS action into Node 24 (Node 20 is deprecated on the runners).
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     permissions:
       contents: write   # needed to create the GitHub release
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0   # Velopack builds delta packages from the release history
 
       - name: Setup .NET 10
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: 10.0.x
 
