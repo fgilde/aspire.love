@@ -9,7 +9,7 @@
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>aspire-love</ToolCommandName>
     <PackageId>aspire.love</PackageId>
-    <Version>0.0.1</Version>
+    <Version>0.0.2</Version>
     <Authors>Florian Gilde</Authors>
     <Company>gilde.org</Company>
     <Description>Make Lovable projects independent of Lovable/Supabase cloud by generating a local .NET Aspire AppHost.</Description>
