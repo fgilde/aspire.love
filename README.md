@@ -8,6 +8,8 @@ aspire.love generates a clean **.NET Aspire AppHost** that runs your entire stac
 locally — Supabase, edge functions and the Vite frontend — with a single command.
 No cloud lock-in. Switch to sync or remote whenever you like.
 
+If you like this tool please give us a star 🔆
+
 [![NuGet](https://img.shields.io/nuget/v/love.aspire.svg)](https://www.nuget.org/packages/love.aspire)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](#license)
 
