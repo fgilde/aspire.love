@@ -23,6 +23,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # Velopack builds delta packages from the release history
 
       - name: Setup .NET 10
         uses: actions/setup-dotnet@v4
@@ -59,14 +61,28 @@ jobs:
       - name: Publish aspire.love Studio (Windows desktop app)
         shell: pwsh
         run: |
+          # Velopack needs a plain published folder (no single-file) so it can build the update package.
           dotnet publish src/AspireLove.Wpf/AspireLove.Wpf.csproj `
             -c Release -r win-x64 --self-contained true `
-            -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true `
-            -p:DebugType=none -p:DebugSymbols=false `
+            -p:PublishSingleFile=false `
             -p:Version=${{ steps.ver.outputs.version }} `
             -o publish/studio
-          New-Item -ItemType Directory -Force artifacts | Out-Null
-          Compress-Archive -Path publish/studio/* -DestinationPath artifacts/aspire.love-studio-win-x64.zip -Force
+
+      - name: Install Velopack CLI (vpk)
+        run: dotnet tool install --global vpk
+
+      - name: Pack aspire.love Studio with Velopack
+        shell: pwsh
+        run: |
+          vpk pack `
+            --packId aspire.love `
+            --packTitle "aspire.love Studio" `
+            --packAuthors "Florian Gilde" `
+            --packVersion ${{ steps.ver.outputs.version }} `
+            --packDir publish/studio `
+            --mainExe AspireLove.Wpf.exe `
+            --icon src/AspireLove.Wpf/Assets/aspire.love.ico `
+            --outputDir releases
 
       - name: Push to NuGet.org
         shell: pwsh
@@ -86,7 +102,9 @@ jobs:
           name: aspire.love ${{ steps.ver.outputs.version }}
           tag_name: ${{ github.ref_name }}
           generate_release_notes: true
-          # The .nupkg backs the CLI update check; the zip is the desktop app download.
+          # artifacts/*.nupkg is the CLI tool. releases/* are the Velopack desktop outputs —
+          # Setup.exe is the installer download; releases.win.json + assets.win.json + RELEASES
+          # are what the in-app UpdateManager reads to find new versions (Velopack 0.0.1100+).
           files: |
             artifacts/*.nupkg
-            artifacts/aspire.love-studio-win-x64.zip
+            releases/*

@@ -45,7 +45,7 @@
     const copyBtn = document.getElementById("copyBtn");
     if (copyBtn) {
         copyBtn.addEventListener("click", async function () {
-            const cmd = "dotnet tool install -g aspire.love\naspire-love init --path ./my-lovable-app";
+            const cmd = "dotnet tool install -g love.aspire\naspire-love init --path ./my-lovable-app";
             try {
                 await navigator.clipboard.writeText(cmd);
                 const dict = window.I18N[current];

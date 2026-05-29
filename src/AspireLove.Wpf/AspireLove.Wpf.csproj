@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="WPF-UI" Version="4.3.0" />
+    <PackageReference Include="Velopack" Version="0.0.1298" />
   </ItemGroup>
 
   <PropertyGroup>
@@ -18,7 +19,9 @@
     <RootNamespace>AspireLove.Studio</RootNamespace>
     <AssemblyName>AspireLove.Wpf</AssemblyName>
     <ApplicationIcon>Assets\aspire.love.ico</ApplicationIcon>
-    <Version>0.0.2</Version>
+    <Version>0.0.3</Version>
+    <!-- Velopack needs to run its install/update hooks before WPF starts up — see Program.cs. -->
+    <StartupObject>AspireLove.Studio.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>

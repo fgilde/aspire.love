@@ -15,7 +15,8 @@ public sealed record UpdateCheckResult(bool UpdateAvailable, Version Current, Ve
 public sealed class UpdateChecker
 {
     public const string Repository = "fgilde/aspire.love";
-    public const string ToolPackageId = "aspire.love";
+    // NuGet id differs from the brand: "Aspire" is a Microsoft-reserved prefix, so the package is "love.aspire".
+    public const string ToolPackageId = "love.aspire";
 
     private static readonly Uri LatestReleaseApi =
         new($"https://api.github.com/repos/{Repository}/releases/latest");
