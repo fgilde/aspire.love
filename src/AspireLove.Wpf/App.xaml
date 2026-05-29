@@ -1,9 +1,30 @@
-﻿<Application x:Class="AspireLove.Wpf.App"
+<Application x:Class="AspireLove.Studio.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:AspireLove.Wpf"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             xmlns:local="clr-namespace:AspireLove.Studio"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ui:ThemesDictionary Theme="Dark" />
+                <ui:ControlsDictionary />
+            </ResourceDictionary.MergedDictionaries>
+
+            <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+
+            <!-- Website brand palette: #ff4d8d → #a855f7 → #6366f1 on a near-black canvas. -->
+            <Color x:Key="BrandPinkColor">#FFFF4D8D</Color>
+            <Color x:Key="BrandPurpleColor">#FFA855F7</Color>
+            <Color x:Key="BrandIndigoColor">#FF6366F1</Color>
+
+            <LinearGradientBrush x:Key="BrandGradientBrush" StartPoint="0,0" EndPoint="1,0">
+                <GradientStop Color="{StaticResource BrandPinkColor}" Offset="0" />
+                <GradientStop Color="{StaticResource BrandPurpleColor}" Offset="0.5" />
+                <GradientStop Color="{StaticResource BrandIndigoColor}" Offset="1" />
+            </LinearGradientBrush>
+
+            <SolidColorBrush x:Key="BrandPinkBrush" Color="{StaticResource BrandPinkColor}" />
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

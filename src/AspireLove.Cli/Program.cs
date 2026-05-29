@@ -107,12 +107,16 @@ initCommand.SetAction(parseResult =>
     return RunInit(options, skipWarnings: parseResult.GetValue(yesOption));
 });
 
+var updateCommand = new Command("update", "Check for and install the latest version of aspire.love.");
+updateCommand.SetAction((_, cancellationToken) => UpdateRunner.RunAsync(cancellationToken));
+
 var rootCommand = new RootCommand("aspire.love — make Lovable projects independent of the Lovable/Supabase cloud.")
 {
     initCommand,
+    updateCommand,
 };
 
-return rootCommand.Parse(args).Invoke();
+return await rootCommand.Parse(args).InvokeAsync();
 
 static int RunInit(GenerationOptions options, bool skipWarnings)
 {
@@ -144,5 +148,9 @@ static int RunInit(GenerationOptions options, bool skipWarnings)
 
     var outcome = generator.Run(resolved);
     ConsoleReporter.PrintOutcome(outcome);
+
+    if (!resolved.DryRun)
+        UpdateRunner.NotifyIfUpdateAvailable();
+
     return 0;
 }

@@ -14,6 +14,9 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <!-- Must not end in ".Wpf": that collides with the "Wpf.Ui" namespace in generated XAML code. -->
+    <RootNamespace>AspireLove.Studio</RootNamespace>
+    <AssemblyName>AspireLove.Wpf</AssemblyName>
   </PropertyGroup>
 
 </Project>

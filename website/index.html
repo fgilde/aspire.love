@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>aspire.love — own your Lovable project</title>
+    <meta name="description"
+          data-i18n="meta.description"
+          content="aspire.love generates a .NET Aspire AppHost so your Lovable project runs fully locally — Supabase, edge functions and frontend, no cloud lock-in." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+          rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <div class="aurora" aria-hidden="true"></div>
+
+    <!-- ============================ Nav ============================ -->
+    <header class="nav">
+        <a class="brand" href="#top">
+            <span class="brand-mark">aspire<span class="heart">♥</span>love</span>
+        </a>
+        <nav class="nav-links">
+            <a href="#how" data-i18n="nav.how">How it works</a>
+            <a href="#modes" data-i18n="nav.modes">Modes</a>
+            <a href="#features" data-i18n="nav.features">Features</a>
+            <a href="#get-started" data-i18n="nav.start">Get started</a>
+        </nav>
+        <div class="nav-actions">
+            <button class="lang-toggle" id="langToggle" aria-label="Toggle language">
+                <span data-lang="en" class="active">EN</span>
+                <span class="sep">/</span>
+                <span data-lang="de">DE</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ============================ Hero ============================ -->
+    <main id="top">
+        <section class="hero">
+            <span class="eyebrow" data-i18n="hero.eyebrow">.NET Aspire · Supabase · Lovable</span>
+            <h1 class="hero-title">
+                <span data-i18n="hero.title1">Own your</span>
+                <span class="gradient" data-i18n="hero.title2">Lovable project.</span>
+            </h1>
+            <p class="hero-sub" data-i18n="hero.sub">
+                aspire.love generates a clean .NET Aspire AppHost that runs your entire stack
+                locally — Supabase, edge functions and the Vite frontend — with one command.
+                No cloud lock-in. Switch to sync or remote whenever you like.
+            </p>
+            <div class="hero-cta">
+                <a class="btn btn-primary" href="#get-started" data-i18n="hero.ctaPrimary">Get started</a>
+                <a class="btn btn-ghost" href="#how" data-i18n="hero.ctaSecondary">See how it works</a>
+            </div>
+            <div class="hero-terminal">
+                <div class="term-bar"><span></span><span></span><span></span></div>
+                <pre class="term-body"><code><span class="c-comment"># install the tool once</span>
+<span class="c-prompt">$</span> dotnet tool install -g aspire.love
+
+<span class="c-comment"># point it at your Lovable project</span>
+<span class="c-prompt">$</span> aspire-love init --path ./my-lovable-app
+
+<span class="c-comment"># then just run it</span>
+<span class="c-prompt">$</span> aspire run</code></pre>
+            </div>
+        </section>
+
+        <!-- ============================ Problem ============================ -->
+        <section class="band">
+            <div class="band-inner">
+                <h2 class="section-title" data-i18n="problem.title">The lock-in problem</h2>
+                <p class="section-lead" data-i18n="problem.lead">
+                    Lovable projects depend on hosted Supabase and a build pipeline you don't control.
+                    aspire.love hands that control back to you.
+                </p>
+                <div class="grid grid-3">
+                    <div class="mini">
+                        <h3 data-i18n="problem.c1t">Run anywhere</h3>
+                        <p data-i18n="problem.c1b">The full Supabase stack spins up locally in Docker, orchestrated by .NET Aspire.</p>
+                    </div>
+                    <div class="mini">
+                        <h3 data-i18n="problem.c2t">Keep your data</h3>
+                        <p data-i18n="problem.c2b">Your migrations and edge functions are applied from your own repo — versioned, reproducible.</p>
+                    </div>
+                    <div class="mini">
+                        <h3 data-i18n="problem.c3t">Deploy your way</h3>
+                        <p data-i18n="problem.c3b">A publish profile for Azure Container Apps is generated, so <code>azd up</code> just works.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================ How ============================ -->
+        <section id="how" class="section">
+            <h2 class="section-title" data-i18n="how.title">How it works</h2>
+            <p class="section-lead" data-i18n="how.lead">Three steps from cloud-bound to fully local.</p>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-no">1</div>
+                    <h3 data-i18n="how.s1t">Point it at your project</h3>
+                    <p data-i18n="how.s1b">Run the CLI or open the desktop app and select your Lovable project folder. The project name is read from package.json.</p>
+                </div>
+                <div class="step">
+                    <div class="step-no">2</div>
+                    <h3 data-i18n="how.s2t">Pick a mode &amp; options</h3>
+                    <p data-i18n="how.s2b">Choose Full Local, Supabase Sync or Remote Connect, set your default user, and optionally enable observability.</p>
+                </div>
+                <div class="step">
+                    <div class="step-no">3</div>
+                    <h3 data-i18n="how.s3t">Generate &amp; run</h3>
+                    <p data-i18n="how.s3b">An <code>aspire</code> folder with a Solution and AppHost is generated. Hit <code>aspire run</code> and everything comes up together.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================ Modes ============================ -->
+        <section id="modes" class="section">
+            <h2 class="section-title" data-i18n="modes.title">Three modes, one tool</h2>
+            <p class="section-lead" data-i18n="modes.lead">Start fully local, switch later — the generated code is commented to make switching trivial.</p>
+            <div class="grid grid-3">
+                <div class="card">
+                    <span class="badge badge-default" data-i18n="modes.m1badge">Default</span>
+                    <h3 data-i18n="modes.m1t">Full Local</h3>
+                    <p data-i18n="modes.m1b">Runs the entire Supabase stack in Docker and applies your migrations and edge functions. Perfect for offline development.</p>
+                </div>
+                <div class="card">
+                    <span class="badge" data-i18n="modes.m2badge">Hybrid</span>
+                    <h3 data-i18n="modes.m2t">Supabase Sync</h3>
+                    <p data-i18n="modes.m2b">Runs Supabase locally but pulls schema and data from an existing cloud project. Stay in sync while you build.</p>
+                </div>
+                <div class="card">
+                    <span class="badge" data-i18n="modes.m3badge">Cloud</span>
+                    <h3 data-i18n="modes.m3t">Remote Connect</h3>
+                    <p data-i18n="modes.m3b">No local stack — the frontend talks directly to your existing Supabase cloud project. Lightweight and fast.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================ Features ============================ -->
+        <section id="features" class="section">
+            <h2 class="section-title" data-i18n="features.title">Built for real projects</h2>
+            <div class="grid grid-2">
+                <div class="feature">
+                    <h3 data-i18n="features.f1t">CLI &amp; desktop app</h3>
+                    <p data-i18n="features.f1b">A <code>dotnet tool</code> for the terminal and a modern Fluent desktop app — both share the exact same generation core.</p>
+                </div>
+                <div class="feature">
+                    <h3 data-i18n="features.f2t">Readable, commented output</h3>
+                    <p data-i18n="features.f2b">Generated C# is structured and documented, so you can understand it, tweak it, and switch modes by hand.</p>
+                </div>
+                <div class="feature">
+                    <h3 data-i18n="features.f3t">Observability included</h3>
+                    <p data-i18n="features.f3b">Optionally wire in Grafana, Tempo and an OpenTelemetry collector for local traces and dashboards.</p>
+                </div>
+                <div class="feature">
+                    <h3 data-i18n="features.f4t">Lovable AI keeps working</h3>
+                    <p data-i18n="features.f4b">Bring your <code>LOVABLE_API_KEY</code> and the edge runtime keeps your project's built-in AI features alive locally.</p>
+                </div>
+                <div class="feature">
+                    <h3 data-i18n="features.f5t">Seeded default user</h3>
+                    <p data-i18n="features.f5b">A default admin user is registered in Supabase and Studio so you can log in immediately.</p>
+                </div>
+                <div class="feature">
+                    <h3 data-i18n="features.f6t">Azure-ready</h3>
+                    <p data-i18n="features.f6b">A Container Apps publish target is provisioned automatically, so deploying with <code>azd up</code> needs no extra wiring.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================ Desktop app ============================ -->
+        <section id="studio" class="section">
+            <h2 class="section-title" data-i18n="studio.title">Or skip the CLI — use the desktop app</h2>
+            <p class="section-lead" data-i18n="studio.lead">
+                aspire.love Studio is a modern Fluent app built on the exact same generation core.
+                Every option is right there, with live validation and a code preview that updates as you type.
+            </p>
+            <figure class="shot-frame">
+                <img src="assets/screenshot.png"
+                     alt="aspire.love Studio: project options on the left, a live AppHost.cs preview on the right."
+                     loading="lazy" />
+            </figure>
+            <div class="grid grid-3">
+                <div class="mini">
+                    <h3 data-i18n="studio.c1t">Live AppHost preview</h3>
+                    <p data-i18n="studio.c1b">The generated AppHost.cs re-renders on every change, so you see exactly what you'll get before writing a single file.</p>
+                </div>
+                <div class="mini">
+                    <h3 data-i18n="studio.c2t">Guided &amp; validated</h3>
+                    <p data-i18n="studio.c2b">Pick a folder, choose a mode and fill in only the fields that mode needs. Inline validation catches problems early.</p>
+                </div>
+                <div class="mini">
+                    <h3 data-i18n="studio.c3t">Launch &amp; publish</h3>
+                    <p data-i18n="studio.c3b">Once the aspire project exists, run it locally with one click or publish to Azure with azd — straight from the app.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================ Get started ============================ -->
+        <section id="get-started" class="section cta">
+            <h2 class="section-title" data-i18n="start.title">Get started in seconds</h2>
+            <p class="section-lead" data-i18n="start.lead">Install the tool and free your project today.</p>
+            <div class="cta-code">
+                <pre><code><span class="c-prompt">$</span> dotnet tool install -g aspire.love
+<span class="c-prompt">$</span> aspire-love init --path ./my-lovable-app</code></pre>
+                <button class="copy-btn" id="copyBtn" data-i18n="start.copy">Copy</button>
+            </div>
+            <p class="cta-note" data-i18n="start.note">Prefer a UI? The Fluent desktop app walks you through every option with live validation and a code preview.</p>
+        </section>
+    </main>
+
+    <!-- ============================ Footer ============================ -->
+    <footer class="footer">
+        <div class="footer-left">
+            <span class="brand-mark small">aspire<span class="heart">♥</span>love</span>
+            <span class="footer-note" data-i18n="footer.note">Make your Lovable project independent. Built on .NET Aspire &amp; Supabase.</span>
+        </div>
+        <div class="footer-right">
+            <a class="footer-link" href="https://github.com/fgilde/aspire.love" target="_blank" rel="noopener">
+                <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" fill="currentColor">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"></path>
+                </svg>
+                <span>GitHub</span>
+            </a>
+            <span class="footer-copy">© <a href="https://gilde.org" target="_blank" rel="noopener">Florian Gilde | gilde.org</a></span>
+        </div>
+    </footer>
+
+    <script src="i18n.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
