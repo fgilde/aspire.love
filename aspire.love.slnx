@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/AspireLove.Core/AspireLove.Core.csproj" />
+    <Project Path="src/AspireLove.Cli/AspireLove.Cli.csproj" />
+    <Project Path="src/AspireLove.Wpf/AspireLove.Wpf.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/AspireLove.Core.Tests/AspireLove.Core.Tests.csproj" />
+  </Folder>
+</Solution>

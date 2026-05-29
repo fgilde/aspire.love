@@ -1,0 +1,73 @@
+{{~ if IsSupabaseSync || IsRemoteConnect ~}}
+using Nextended.Aspire.Hosting.Supabase.Config;
+
+{{ end ~}}
+namespace {{ AppHostNamespace }};
+
+/// <summary>
+/// Project-specific values used by AppHost.cs. Keep secrets out of source control in real
+/// deployments (e.g. user secrets / environment variables); these defaults exist so the
+/// project runs out of the box for local development.
+/// </summary>
+internal static class Constants
+{
+    /// <summary>Admin user seeded into Supabase auth and used for the Studio / Grafana login.</summary>
+    public static class User
+    {
+        public static readonly (string Name, string Email, string Password) Default =
+            ("{{ UserName }}", "{{ UserEmail }}", "{{ UserPassword }}");
+    }
+{{~ if HasLovableApiKey }}
+
+    /// <summary>Lovable AI gateway key, wired into the edge runtime so built-in AI keeps working.</summary>
+    public static class Ai
+    {
+        public const string LovableApiKey =
+            "{{ LovableApiKey }}";
+    }
+{{~ end ~}}
+{{~ if IsSupabaseSync }}
+
+    /// <summary>Credentials for syncing schema/data from the existing Supabase cloud project.</summary>
+    public static class Supabase
+    {
+        public const string ProjectRef = "{{ SyncProjectRef }}";
+        public const string ServiceKey = "{{ SyncServiceKey }}";
+        public const string DbPassword = "{{ SyncDbPassword }}";
+        public const string ManagementToken = "{{ SyncManagementToken }}";
+
+        public static readonly ISupabaseFullSyncInfo SyncInfo = new SupabaseInfo();
+    }
+{{~ end ~}}
+{{~ if IsRemoteConnect }}
+
+    /// <summary>Reference to the existing Supabase cloud project (no local stack is started).</summary>
+    public static class Supabase
+    {
+        public const string ProjectRef = "{{ RemoteProjectRef }}";
+        public const string ServiceKey = "{{ RemoteServiceKey }}";
+
+        public static readonly ISupabaseReferenceInfo RemoteInfo = new SupabaseInfo();
+    }
+{{~ end ~}}
+}
+{{~ if IsSupabaseSync }}
+
+/// <summary>Maps <see cref="Constants.Supabase"/> onto the sync interface expected by WithProjectSync.</summary>
+internal sealed class SupabaseInfo : ISupabaseFullSyncInfo
+{
+    public string ProjectRefId => Constants.Supabase.ProjectRef;
+    public string ServiceKey => Constants.Supabase.ServiceKey;
+    public string DbPassword => Constants.Supabase.DbPassword;
+    public string ManagementToken => Constants.Supabase.ManagementToken;
+}
+{{~ end ~}}
+{{~ if IsRemoteConnect }}
+
+/// <summary>Maps <see cref="Constants.Supabase"/> onto the reference interface expected by WithSupabaseVite.</summary>
+internal sealed class SupabaseInfo : ISupabaseReferenceInfo
+{
+    public string ProjectRefId => Constants.Supabase.ProjectRef;
+    public string ServiceKey => Constants.Supabase.ServiceKey;
+}
+{{~ end ~}}

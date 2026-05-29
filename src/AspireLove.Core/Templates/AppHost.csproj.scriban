@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Sdk Name="Aspire.AppHost.Sdk" Version="{{ AspireSdkVersion }}" />
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UserSecretsId>{{ UserSecretsId }}</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="{{ AspireVersion }}" />
+    <!-- Provisions the Azure Container Apps target used by `azd up` (publish mode). -->
+    <PackageReference Include="Aspire.Hosting.Azure.AppContainers" Version="{{ AspireVersion }}" />
+    <!-- Runs the Lovable Vite frontend via the `aspire` npm script. -->
+    <PackageReference Include="Aspire.Hosting.JavaScript" Version="{{ AspireVersion }}" />
+    <!-- Supabase + observability hosting extensions for Aspire (pulls the rest transitively). -->
+    <PackageReference Include="Nextended.Aspire.Hosting.Supabase" Version="{{ NextendedSupabaseVersion }}" />
+  </ItemGroup>
+
+</Project>
