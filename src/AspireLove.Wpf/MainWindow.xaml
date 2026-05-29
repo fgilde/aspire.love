@@ -7,6 +7,7 @@
                  xmlns:vm="clr-namespace:AspireLove.Studio.ViewModels"
                  mc:Ignorable="d"
                  Title="aspire.love"
+                 Icon="pack://application:,,,/Assets/aspire.love.ico"
                  Width="1100" Height="760"
                  MinWidth="900" MinHeight="600"
                  WindowStartupLocation="CenterScreen"
@@ -26,13 +27,18 @@
 
         <ui:TitleBar Grid.Row="0" Title="">
             <ui:TitleBar.Header>
-                <!-- Mirrors the website brand mark: "aspire" + gradient heart + "love". -->
-                <TextBlock Margin="14,0,0,0" VerticalAlignment="Center"
-                           FontSize="14" FontWeight="Bold">
-                    <Run Text="aspire" />
-                    <Run Text="&#x2665;" Foreground="{StaticResource BrandPinkBrush}" />
-                    <Run Text="love" />
-                </TextBlock>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <!-- Mirrors the website brand mark: "aspire" + gradient heart + "love". -->
+                    <TextBlock Margin="14,0,0,0" VerticalAlignment="Center"
+                               FontSize="14" FontWeight="Bold">
+                        <Run Text="aspire" />
+                        <Run Text="&#x2665;" Foreground="{StaticResource BrandPinkBrush}" />
+                        <Run Text="love" />
+                    </TextBlock>
+                    <ui:Button Margin="8,0,0,0" Padding="6" Appearance="Transparent"
+                               Icon="{ui:SymbolIcon Info24}" Click="OnShowAbout"
+                               ToolTip="About aspire.love — version, updates &amp; links" />
+                </StackPanel>
             </ui:TitleBar.Header>
         </ui:TitleBar>
 

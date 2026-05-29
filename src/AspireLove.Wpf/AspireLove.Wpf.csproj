@@ -17,6 +17,13 @@
     <!-- Must not end in ".Wpf": that collides with the "Wpf.Ui" namespace in generated XAML code. -->
     <RootNamespace>AspireLove.Studio</RootNamespace>
     <AssemblyName>AspireLove.Wpf</AssemblyName>
+    <ApplicationIcon>Assets\aspire.love.ico</ApplicationIcon>
+    <Version>0.0.1</Version>
   </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Embedded so the window/taskbar icon resolves at runtime via a pack URI. -->
+    <Resource Include="Assets\aspire.love.ico" />
+  </ItemGroup>
 
 </Project>

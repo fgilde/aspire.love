@@ -7,14 +7,15 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Manual release version (e.g. 0.2.0)'
+        description: 'Manual release version (e.g. 0.0.2)'
         required: true
-        default: '0.1.0'
+        default: '0.0.1'
 
 jobs:
   release:
-    name: Pack & publish the dotnet tool
-    runs-on: ubuntu-latest
+    name: Pack the CLI tool & publish the desktop app
+    # Windows so we can build the WPF desktop app; the CLI packs fine here too.
+    runs-on: windows-latest
 
     permissions:
       contents: write   # needed to create the GitHub release
@@ -37,7 +38,7 @@ jobs:
           elif [[ -n "${{ github.event.inputs.version }}" ]]; then
             v="${{ github.event.inputs.version }}"
           else
-            v="0.1.0"
+            v="0.0.1"
           fi
           echo "Version: $v"
           echo "version=$v" >> "$GITHUB_OUTPUT"
@@ -55,6 +56,18 @@ jobs:
           -o artifacts
           /p:Version=${{ steps.ver.outputs.version }}
 
+      - name: Publish aspire.love Studio (Windows desktop app)
+        shell: pwsh
+        run: |
+          dotnet publish src/AspireLove.Wpf/AspireLove.Wpf.csproj `
+            -c Release -r win-x64 --self-contained true `
+            -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true `
+            -p:DebugType=none -p:DebugSymbols=false `
+            -p:Version=${{ steps.ver.outputs.version }} `
+            -o publish/studio
+          New-Item -ItemType Directory -Force artifacts | Out-Null
+          Compress-Archive -Path publish/studio/* -DestinationPath artifacts/aspire.love-studio-win-x64.zip -Force
+
       - name: Push to NuGet.org
         run: >
           dotnet nuget push "artifacts/*.nupkg"
@@ -69,5 +82,7 @@ jobs:
           name: aspire.love ${{ steps.ver.outputs.version }}
           tag_name: ${{ github.ref_name }}
           generate_release_notes: true
-          # Attach the .nupkg so the GitHub-releases update check has an asset to point at.
-          files: artifacts/*.nupkg
+          # The .nupkg backs the CLI update check; the zip is the desktop app download.
+          files: |
+            artifacts/*.nupkg
+            artifacts/aspire.love-studio-win-x64.zip
