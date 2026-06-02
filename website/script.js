@@ -73,8 +73,45 @@
         },
         { threshold: 0.12 }
     );
-    for (const el of document.querySelectorAll(".mini, .step, .card, .feature, .shot-frame, .section-title, .section-lead")) {
+    for (const el of document.querySelectorAll(".mini, .step, .card, .feature, .shot-frame, .section-title, .section-lead, .faq-item")) {
         el.classList.add("reveal");
         observer.observe(el);
+    }
+
+    // Scrollspy: highlight the nav link for the section currently in view.
+    const navLinks = [...document.querySelectorAll(".nav-links a[href^='#']")];
+    const linkById = new Map(navLinks.map((a) => [a.getAttribute("href").slice(1), a]));
+    const spied = [...linkById.keys()]
+        .map((id) => document.getElementById(id))
+        .filter(Boolean);
+
+    if (spied.length) {
+        const spy = new IntersectionObserver(
+            (entries) => {
+                for (const entry of entries) {
+                    if (!entry.isIntersecting) continue;
+                    for (const a of navLinks) a.classList.remove("active");
+                    linkById.get(entry.target.id)?.classList.add("active");
+                }
+            },
+            { rootMargin: "-45% 0px -50% 0px", threshold: 0 }
+        );
+        for (const section of spied) spy.observe(section);
+    }
+
+    // Live GitHub star count on the open-source CTA (best-effort, silently skipped on failure).
+    const starCount = document.getElementById("starCount");
+    if (starCount) {
+        fetch("https://api.github.com/repos/fgilde/aspire.love")
+            .then((r) => (r.ok ? r.json() : null))
+            .then((data) => {
+                const n = data && typeof data.stargazers_count === "number" ? data.stargazers_count : null;
+                if (n === null) return;
+                starCount.textContent = n >= 1000 ? (n / 1000).toFixed(1) + "k" : String(n);
+                starCount.hidden = false;
+            })
+            .catch(() => {
+                /* offline or rate-limited — leave the count hidden */
+            });
     }
 })();

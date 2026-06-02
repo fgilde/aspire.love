@@ -42,6 +42,7 @@
             <a href="#modes" data-i18n="nav.modes">Modes</a>
             <a href="#features" data-i18n="nav.features">Features</a>
             <a href="#deploy" data-i18n="nav.deploy">Deploy</a>
+            <a href="#faq" data-i18n="nav.faq">FAQ</a>
         </nav>
         <div class="nav-actions">
             <a class="nav-icon" href="https://github.com/fgilde/aspire.love" target="_blank" rel="noopener"
@@ -304,6 +305,7 @@
         <section id="get-started" class="section cta">
             <h2 class="section-title" data-i18n="start.title">Get started in seconds</h2>
             <p class="section-lead" data-i18n="start.lead">Install the tool and free your project today.</p>
+            <p class="prereq" data-i18n="start.prereq">Requires the .NET 10 SDK, Docker (for the local Supabase stack) and the .NET Aspire workload.</p>
             <div class="cta-code">
                 <pre><code><span class="c-prompt">$</span> dotnet tool install -g love.aspire
 <span class="c-prompt">$</span> aspire-love init --path ./my-lovable-app</code></pre>
@@ -314,6 +316,52 @@
                href="https://github.com/fgilde/aspire.love/releases/latest/download/aspire.love-win-Setup.exe"
                data-i18n="start.download">Download the desktop app</a>
             <p class="cta-note" data-i18n="start.note">No CLI needed — aspire.love Studio walks you through every option with live validation and a live code preview.</p>
+        </section>
+
+        <!-- ============================ FAQ ============================ -->
+        <section id="faq" class="section">
+            <h2 class="section-title" data-i18n="faq.title">Frequently asked questions</h2>
+            <p class="section-lead" data-i18n="faq.lead">Everything you might wonder before running it on your project.</p>
+            <div class="faq-list">
+                <details class="faq-item">
+                    <summary data-i18n="faq.q1">Does it change my Lovable project?</summary>
+                    <p data-i18n="faq.a1">Almost nothing is touched. aspire.love adds a self-contained <code>aspire/</code> folder and a single <code>aspire</code> script to your <code>package.json</code> so the AppHost can launch the frontend. Your existing source stays exactly as it is.</p>
+                </details>
+                <details class="faq-item">
+                    <summary data-i18n="faq.q2">What do I need to run it?</summary>
+                    <p data-i18n="faq.a2">The .NET 10 SDK, Docker (for the local Supabase stack) and the .NET Aspire workload. The generated AppHost orchestrates everything from there.</p>
+                </details>
+                <details class="faq-item">
+                    <summary data-i18n="faq.q3">Can I switch modes later?</summary>
+                    <p data-i18n="faq.a3">Yes. Start with Full Local and move to Supabase Sync or Remote Connect whenever you like — the generated C# is commented to make switching by hand trivial, or just re-run the tool.</p>
+                </details>
+                <details class="faq-item">
+                    <summary data-i18n="faq.q4">Is it free and open source?</summary>
+                    <p data-i18n="faq.a4">Completely. aspire.love is MIT-licensed and developed in the open on GitHub. Use it for personal and commercial projects alike.</p>
+                </details>
+                <details class="faq-item">
+                    <summary data-i18n="faq.q5">Windows only?</summary>
+                    <p data-i18n="faq.a5">The aspire.love Studio desktop app is Windows-only, but the <code>love.aspire</code> CLI runs anywhere .NET 10 runs — Windows, macOS and Linux.</p>
+                </details>
+                <details class="faq-item">
+                    <summary data-i18n="faq.q6">Does Lovable's built-in AI still work?</summary>
+                    <p data-i18n="faq.a6">Yes. Provide your <code>LOVABLE_API_KEY</code> and the local edge runtime keeps your project's AI features working while everything runs on your machine.</p>
+                </details>
+            </div>
+        </section>
+
+        <!-- ============================ Open source ============================ -->
+        <section class="opensource">
+            <div class="opensource-inner">
+                <p data-i18n="oss.text">aspire.love is free and open source. If it saved you time, a star really helps.</p>
+                <a class="btn btn-primary star-btn" href="https://github.com/fgilde/aspire.love" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="currentColor">
+                        <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.193L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"></path>
+                    </svg>
+                    <span data-i18n="oss.cta">Star on GitHub</span>
+                    <span class="star-count" id="starCount" hidden></span>
+                </a>
+            </div>
         </section>
     </main>
 
