@@ -99,7 +99,9 @@ window.I18N = {
         "start.lead": "Install the tool and free your project today.",
         "start.copy": "Copy",
         "start.copied": "Copied!",
-        "start.note": "Prefer a UI? Grab aspire.love Studio and drive everything above from a single window.",
+        "start.or": "or",
+        "start.download": "Download the desktop app",
+        "start.note": "No CLI needed — aspire.love Studio walks you through every option with live validation and a live code preview.",
 
         "footer.note": "Make your Lovable project independent. Built on .NET Aspire & Supabase.",
     },
@@ -203,7 +205,9 @@ window.I18N = {
         "start.lead": "Installiere das Werkzeug und befreie dein Projekt noch heute.",
         "start.copy": "Kopieren",
         "start.copied": "Kopiert!",
-        "start.note": "Lieber eine UI? Schnapp dir aspire.love Studio und steuere alles oben aus einem Fenster.",
+        "start.or": "oder",
+        "start.download": "Desktop-App herunterladen",
+        "start.note": "Keine CLI nötig — aspire.love Studio führt dich durch jede Option, mit Live-Validierung und einer Live-Code-Vorschau.",
 
         "footer.note": "Mach dein Lovable-Projekt unabhängig. Gebaut auf .NET Aspire & Supabase.",
     },

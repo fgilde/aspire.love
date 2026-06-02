@@ -9,6 +9,20 @@
           content="aspire.love generates a .NET Aspire AppHost so your Lovable project runs fully locally — Supabase, edge functions and frontend, no cloud lock-in." />
     <link rel="icon" href="assets/favicon.ico" sizes="any" />
     <link rel="apple-touch-icon" href="assets/favicon.ico" />
+
+    <!-- Social sharing (OpenGraph + Twitter) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="aspire.love" />
+    <meta property="og:url" content="https://www.aspire.love/" />
+    <meta property="og:title" content="aspire.love — your full Lovable stack, local & hosted anywhere" />
+    <meta property="og:description"
+          content="Turn your Lovable app into a self-contained .NET Aspire solution. Run Supabase, edge functions and the frontend locally, then deploy anywhere — fully independent of Supabase and Lovable." />
+    <meta property="og:image" content="https://www.aspire.love/assets/aspire-dashboard.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="aspire.love — your full Lovable stack, local & hosted anywhere" />
+    <meta name="twitter:description"
+          content="Run your whole Lovable stack locally with one command, then deploy the same .NET Aspire solution to Azure Container Apps, Kubernetes or Docker." />
+    <meta name="twitter:image" content="https://www.aspire.love/assets/aspire-dashboard.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
@@ -295,7 +309,11 @@
 <span class="c-prompt">$</span> aspire-love init --path ./my-lovable-app</code></pre>
                 <button class="copy-btn" id="copyBtn" data-i18n="start.copy">Copy</button>
             </div>
-            <p class="cta-note" data-i18n="start.note">Prefer a UI? The Fluent desktop app walks you through every option with live validation and a code preview.</p>
+            <div class="cta-or"><span data-i18n="start.or">or</span></div>
+            <a class="btn btn-primary"
+               href="https://github.com/fgilde/aspire.love/releases/latest/download/aspire.love-win-Setup.exe"
+               data-i18n="start.download">Download the desktop app</a>
+            <p class="cta-note" data-i18n="start.note">No CLI needed — aspire.love Studio walks you through every option with live validation and a live code preview.</p>
         </section>
     </main>
 
