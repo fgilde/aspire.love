@@ -89,7 +89,8 @@ a { color: inherit; text-decoration: none; }
     transition: color 0.2s, border-color 0.2s, transform 0.15s;
 }
 .nav-icon:hover { color: var(--text); border-color: rgba(255, 255, 255, 0.28); transform: translateY(-1px); }
-.btn-sm { padding: 9px 18px; font-size: 0.88rem; border-radius: 10px; }
+.nav-actions .nav-icon { margin-right: 6px; }
+.btn.btn-sm { padding: 7px 15px; font-size: 0.82rem; border-radius: 9px; }
 
 .lang-toggle {
     display: inline-flex;
