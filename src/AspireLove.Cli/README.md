@@ -109,6 +109,17 @@ aspire run
 aspire-love update
 ```
 
+## Under the hood
+
+The generated AppHost is powered by
+[**Nextended.Aspire.Hosting.Supabase**](https://www.nuget.org/packages/Nextended.Aspire.Hosting.Supabase),
+the open-source .NET Aspire hosting integration that makes Supabase a first-class Aspire resource. A
+single `builder.AddSupabase(...)` call brings up the entire stack — Postgres, Auth, Storage, Realtime,
+the Kong gateway, Studio and the edge-function runtime — with a fluent API for migrations, edge
+functions, a seeded user, cloud sync and observability. aspire.love is the tool that generates a
+clean, readable AppHost around that package, so you get a real .NET solution instead of hand-rolled
+Docker Compose.
+
 ## Prefer a UI?
 
 There's also **aspire.love Studio**, a Fluent desktop app that walks you through every option with

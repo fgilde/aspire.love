@@ -270,6 +270,38 @@
             </div>
         </section>
 
+        <!-- ============================ Powered by ============================ -->
+        <section id="powered" class="band">
+            <div class="band-inner">
+                <h2 class="section-title" data-i18n="powered.title">The engine under the hood</h2>
+                <p class="section-lead" data-i18n="powered.lead">
+                    aspire.love doesn't reinvent Supabase orchestration — it builds on the open-source
+                    Nextended.Aspire.Hosting.Supabase integration, which makes the whole Supabase stack
+                    a first-class .NET Aspire citizen.
+                </p>
+                <div class="powered-grid">
+                    <div class="powered-copy">
+                        <h3 data-i18n="powered.whatt">What the package does</h3>
+                        <p data-i18n="powered.whatb">One <code>builder.AddSupabase(...)</code> call spins up Postgres, Auth, Storage, Realtime, the Kong gateway, Studio and the edge-function runtime as managed Aspire resources — with a fluent API for migrations, edge functions, a seeded user, cloud sync and observability.</p>
+                        <h3 data-i18n="powered.whyt">Why aspire.love uses it</h3>
+                        <p data-i18n="powered.whyb">It's the engine behind every mode. aspire.love generates a clean, readable AppHost around it instead of hand-rolled Docker Compose — so you get a real .NET solution you can read, tweak and extend with the package's own API.</p>
+                        <a class="btn btn-primary btn-sm"
+                           href="https://www.nuget.org/packages/Nextended.Aspire.Hosting.Supabase"
+                           target="_blank" rel="noopener"
+                           data-i18n="powered.cta">View the package on NuGet</a>
+                    </div>
+                    <div class="cta-code powered-code">
+                        <pre><code><span class="c-comment">// Postgres · Auth · Storage · Realtime · Studio · edge functions</span>
+<span class="c-kw">var</span> supabase = builder.<span class="c-fn">AddSupabase</span>(<span class="c-str">"supabase"</span>)
+    .<span class="c-fn">ConfigureStudio</span>(s =&gt; s.<span class="c-fn">WithProjectName</span>(<span class="c-str">"MyApp"</span>))
+    .<span class="c-fn">WithRegisteredUser</span>(email, password, name)
+    .<span class="c-fn">WithMigrations</span>(migrationsPath)
+    .<span class="c-fn">WithEdgeFunctions</span>(edgeFunctionsPath);</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- ============================ Deploy anywhere ============================ -->
         <section id="deploy" class="section">
             <h2 class="section-title" data-i18n="deploy.title">Local today, hosted anywhere tomorrow</h2>

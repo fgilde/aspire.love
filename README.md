@@ -103,6 +103,30 @@ aspire-love update # check for and install the latest version of aspire.love
 - **Azure-ready** — a Container Apps publish target is provisioned automatically, so
   deploying with `azd up` needs no extra wiring.
 
+## Under the hood
+
+The generated AppHost is powered by
+[**Nextended.Aspire.Hosting.Supabase**](https://www.nuget.org/packages/Nextended.Aspire.Hosting.Supabase),
+the open-source .NET Aspire hosting integration that makes Supabase a first-class Aspire resource.
+
+A single `builder.AddSupabase(...)` call brings up the entire Supabase stack — Postgres, Auth,
+Storage, Realtime, the Kong gateway, Studio and the edge-function runtime — as managed Aspire
+resources, with a fluent API for migrations, edge functions, a seeded user, cloud sync and
+observability:
+
+```csharp
+var supabase = builder.AddSupabase("supabase")
+    .ConfigureStudio(s => s.WithProjectName("MyApp"))
+    .WithRegisteredUser(email, password, name)
+    .WithMigrations(migrationsPath)
+    .WithEdgeFunctions(edgeFunctionsPath);
+```
+
+aspire.love doesn't reinvent any of this — it's the engine behind every mode. The tool simply
+generates a clean, readable AppHost around the package (instead of hand-rolled Docker Compose), so
+you get a real .NET solution you can read, tweak and extend with the package's own API. Observability
+builds on the companion `Nextended.Aspire.Hosting.Observability` package.
+
 ## Update
 
 ```bash

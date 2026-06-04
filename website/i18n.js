@@ -82,6 +82,14 @@ window.I18N = {
         "result.c3t": "Open it and build",
         "result.c3b": "Follow the frontend link, sign in with the seeded default user and develop fully offline — no cloud project required.",
 
+        "powered.title": "The engine under the hood",
+        "powered.lead": "aspire.love doesn't reinvent Supabase orchestration — it builds on the open-source Nextended.Aspire.Hosting.Supabase integration, which makes the whole Supabase stack a first-class .NET Aspire citizen.",
+        "powered.whatt": "What the package does",
+        "powered.whatb": "One builder.AddSupabase(...) call spins up Postgres, Auth, Storage, Realtime, the Kong gateway, Studio and the edge-function runtime as managed Aspire resources — with a fluent API for migrations, edge functions, a seeded user, cloud sync and observability.",
+        "powered.whyt": "Why aspire.love uses it",
+        "powered.whyb": "It's the engine behind every mode. aspire.love generates a clean, readable AppHost around it instead of hand-rolled Docker Compose — so you get a real .NET solution you can read, tweak and extend with the package's own API.",
+        "powered.cta": "View the package on NuGet",
+
         "deploy.title": "Local today, hosted anywhere tomorrow",
         "deploy.lead": "What you generate is a standard .NET Aspire solution — not a black box. Ship the exact same code from your laptop to the cloud of your choice. No Supabase project and no Lovable pipeline required.",
         "deploy.c1badge": "azd up",
@@ -207,6 +215,14 @@ window.I18N = {
         "result.c2b": "Klick auf jede Ressource für Live-Logs. Mit aktivierter Observability fließen Traces nach Grafana und Tempo — so verfolgst du einen Request von Anfang bis Ende.",
         "result.c3t": "Öffnen und loslegen",
         "result.c3b": "Folge dem Frontend-Link, melde dich mit dem vorkonfigurierten Standardnutzer an und entwickle vollständig offline — ganz ohne Cloud-Projekt.",
+
+        "powered.title": "Die Engine unter der Haube",
+        "powered.lead": "aspire.love erfindet die Supabase-Orchestrierung nicht neu — es baut auf der quelloffenen Integration Nextended.Aspire.Hosting.Supabase auf, die den kompletten Supabase-Stack zu einer First-Class-Ressource in .NET Aspire macht.",
+        "powered.whatt": "Was das Paket macht",
+        "powered.whatb": "Ein einziger builder.AddSupabase(...)-Aufruf startet Postgres, Auth, Storage, Realtime, das Kong-Gateway, Studio und die Edge-Function-Runtime als verwaltete Aspire-Ressourcen — mit einer Fluent-API für Migrations, Edge Functions, einen vorkonfigurierten Nutzer, Cloud-Sync und Observability.",
+        "powered.whyt": "Warum aspire.love es nutzt",
+        "powered.whyb": "Es ist die Engine hinter jedem Modus. aspire.love generiert einen sauberen, lesbaren AppHost darum herum statt handgeschriebenes Docker Compose — du bekommst eine echte .NET-Solution, die du lesen, anpassen und mit der API des Pakets erweitern kannst.",
+        "powered.cta": "Paket auf NuGet ansehen",
 
         "deploy.title": "Heute lokal, morgen überall gehostet",
         "deploy.lead": "Was du generierst, ist eine ganz normale .NET-Aspire-Solution — keine Blackbox. Bring exakt denselben Code von deinem Laptop in die Cloud deiner Wahl. Ohne Supabase-Projekt und ohne Lovable-Pipeline.",
