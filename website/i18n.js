@@ -128,6 +128,10 @@ window.I18N = {
         "faq.q6": "Does Lovable's built-in AI still work?",
         "faq.a6": "Yes. Provide your LOVABLE_API_KEY and the local edge runtime keeps your project's AI features working while everything runs on your machine.",
 
+        "stats.nuget": "NuGet downloads",
+        "stats.desktop": "Desktop downloads",
+        "stats.stars": "GitHub stars",
+
         "oss.text": "aspire.love is free and open source. If it saved you time, a star really helps.",
         "oss.cta": "Star on GitHub",
 
@@ -261,6 +265,10 @@ window.I18N = {
         "faq.a5": "Die Desktop-App aspire.love Studio läuft nur unter Windows, aber das love.aspire-CLI läuft überall, wo .NET 10 läuft — Windows, macOS und Linux.",
         "faq.q6": "Funktioniert die eingebaute Lovable-KI weiterhin?",
         "faq.a6": "Ja. Hinterlege deinen LOVABLE_API_KEY, und die lokale Edge-Runtime hält die KI-Features deines Projekts am Leben, während alles auf deinem Rechner läuft.",
+
+        "stats.nuget": "NuGet-Downloads",
+        "stats.desktop": "Desktop-Downloads",
+        "stats.stars": "GitHub-Stars",
 
         "oss.text": "aspire.love ist kostenlos und Open Source. Wenn es dir Zeit gespart hat, hilft ein Stern wirklich.",
         "oss.cta": "Auf GitHub mit Stern markieren",

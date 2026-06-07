@@ -99,19 +99,39 @@
         for (const section of spied) spy.observe(section);
     }
 
-    // Live GitHub star count on the open-source CTA (best-effort, silently skipped on failure).
-    const starCount = document.getElementById("starCount");
-    if (starCount) {
-        fetch("https://api.github.com/repos/fgilde/aspire.love")
-            .then((r) => (r.ok ? r.json() : null))
-            .then((data) => {
-                const n = data && typeof data.stargazers_count === "number" ? data.stargazers_count : null;
-                if (n === null) return;
-                starCount.textContent = n >= 1000 ? (n / 1000).toFixed(1) + "k" : String(n);
-                starCount.hidden = false;
-            })
-            .catch(() => {
-                /* offline or rate-limited — leave the count hidden */
-            });
+    // Live project stats (best-effort — each stat hides itself if its source can't be reached).
+    function setStat(id, value) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        if (typeof value !== "number" || !isFinite(value)) {
+            el.closest(".stat")?.setAttribute("hidden", "");
+            return;
+        }
+        el.textContent = value.toLocaleString("en-US");
     }
+
+    // NuGet total downloads for the love.aspire package.
+    fetch("https://azuresearch-usnc.nuget.org/query?q=packageid:love.aspire&prerelease=true")
+        .then((r) => (r.ok ? r.json() : null))
+        .then((j) => setStat("statNuget", j && j.data && j.data[0] ? j.data[0].totalDownloads : null))
+        .catch(() => setStat("statNuget", null));
+
+    // Total downloads across all Windows desktop release assets on GitHub.
+    fetch("https://api.github.com/repos/fgilde/aspire.love/releases?per_page=100")
+        .then((r) => (r.ok ? r.json() : null))
+        .then((releases) => {
+            if (!Array.isArray(releases)) return setStat("statDesktop", null);
+            let total = 0;
+            for (const rel of releases)
+                for (const asset of rel.assets || [])
+                    if (/win|\.exe$/i.test(asset.name)) total += asset.download_count || 0;
+            setStat("statDesktop", total);
+        })
+        .catch(() => setStat("statDesktop", null));
+
+    // GitHub stars.
+    fetch("https://api.github.com/repos/fgilde/aspire.love")
+        .then((r) => (r.ok ? r.json() : null))
+        .then((data) => setStat("statStars", data ? data.stargazers_count : null))
+        .catch(() => setStat("statStars", null));
 })();
