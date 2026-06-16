@@ -5,6 +5,7 @@
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
                  xmlns:vm="clr-namespace:AspireLove.Studio.ViewModels"
+                 xmlns:hl="clr-namespace:AspireLove.Studio.Highlighting"
                  mc:Ignorable="d"
                  Title="aspire.love"
                  Icon="pack://application:,,,/Assets/aspire.love.ico"
@@ -209,16 +210,15 @@
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Row="0" Text="AppHost.cs preview — updates live as you type"
                                    FontWeight="SemiBold" Margin="0,0,0,8" />
-                        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto"
-                                      HorizontalScrollBarVisibility="Auto">
-                            <TextBox Text="{Binding PreviewContent, Mode=OneWay}"
-                                     IsReadOnly="True" BorderThickness="0"
+                        <RichTextBox Grid.Row="1"
+                                     hl:CodeHighlighter.Source="{Binding PreviewContent}"
+                                     IsReadOnly="True" IsDocumentEnabled="False"
+                                     BorderThickness="0" Padding="0"
                                      Background="Transparent"
                                      FontFamily="Cascadia Code, Consolas, monospace"
                                      FontSize="12"
-                                     TextWrapping="NoWrap"
-                                     VerticalAlignment="Top" />
-                        </ScrollViewer>
+                                     VerticalScrollBarVisibility="Auto"
+                                     HorizontalScrollBarVisibility="Auto" />
                     </Grid>
                 </ui:Card>
             </Grid>
