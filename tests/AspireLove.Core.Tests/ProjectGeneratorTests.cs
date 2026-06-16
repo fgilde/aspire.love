@@ -179,6 +179,70 @@ public class ProjectGeneratorTests
     }
 
     [Fact]
+    public void Persistent_storage_wires_nfs_minio_and_constants_when_enabled()
+    {
+        using var project = new TempProject().WithPackageName("app");
+
+        var files = _generator.Generate(FullLocal(project.Path) with { AddPersistentStorage = true });
+
+        var appHost = AppHostCs(files);
+        Assert.Contains("var containerEnv = builder.AddAzureContainerAppEnvironment", appHost);
+        Assert.Contains("AddSupabaseNfsStorage(containerEnv", appHost);
+        Assert.Contains("AddMinioS3OnNfs(", appHost);
+
+        var constants = ConstantsCs(files);
+        Assert.Contains("class Storage", constants);
+        Assert.Contains("MinioRootPassword", constants);
+    }
+
+    [Fact]
+    public void Persistent_storage_absent_leaves_no_unused_container_env_variable()
+    {
+        using var project = new TempProject().WithPackageName("app");
+
+        var files = _generator.Generate(FullLocal(project.Path));
+
+        var appHost = AppHostCs(files);
+        Assert.DoesNotContain("var containerEnv", appHost);
+        Assert.DoesNotContain("AddSupabaseNfsStorage", appHost);
+        Assert.DoesNotContain("class Storage", ConstantsCs(files));
+    }
+
+    [Fact]
+    public void Persistent_storage_is_dropped_when_not_local_supabase()
+    {
+        using var project = new TempProject().WithPackageName("app");
+
+        var files = _generator.Generate(new GenerationOptions
+        {
+            LovableProjectPath = project.Path,
+            ProjectName = "App",
+            Mode = GenerationMode.RemoteConnect,
+            RemoteInfo = new RemoteConnectInfo("r", "k"),
+            AddPersistentStorage = true,
+        });
+
+        Assert.DoesNotContain("AddSupabaseNfsStorage", AppHostCs(files));
+        Assert.DoesNotContain("class Storage", ConstantsCs(files));
+    }
+
+    [Fact]
+    public void Deploy_script_is_generated_only_when_requested()
+    {
+        using var project = new TempProject().WithPackageName("app");
+
+        var without = _generator.Generate(FullLocal(project.Path));
+        Assert.DoesNotContain(without, f => f.RelativePath == "scripts/deploy.ps1");
+
+        var with = _generator.Generate(FullLocal(project.Path) with { AddDeployScript = true });
+        var script = with.Single(f => f.RelativePath == "scripts/deploy.ps1").Content;
+        // The script must target this project's AppHost directory and call azd.
+        Assert.Contains("MyCoolApp.AppHost", script);
+        Assert.Contains("azd up", script);
+        Assert.DoesNotContain("way2ofd", script);
+    }
+
+    [Fact]
     public void Csproj_pins_expected_package_versions()
     {
         using var project = new TempProject().WithPackageName("app");

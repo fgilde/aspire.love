@@ -26,6 +26,14 @@ var monitoringOption = new Option<bool>("--monitoring")
 {
     Description = "Add the Grafana/Tempo/OpenTelemetry observability stack (local modes only).",
 };
+var persistentStorageOption = new Option<bool>("--persistent-storage")
+{
+    Description = "Persist Supabase Storage when deployed (Azure Files NFS + MinIO S3; local modes only).",
+};
+var deployScriptOption = new Option<bool>("--deploy-script")
+{
+    Description = "Generate a guided scripts/deploy.ps1 for deploying to Azure with azd.",
+};
 var lovableKeyOption = new Option<string?>("--lovable-api-key")
 {
     Description = "Lovable AI gateway key, so the project's built-in AI keeps working locally.",
@@ -65,7 +73,8 @@ var yesOption = new Option<bool>("--yes", "-y") { Description = "Proceed even if
 
 var initCommand = new Command("init", "Generate an Aspire AppHost into an existing Lovable project.")
 {
-    pathOption, nameOption, orgOption, modeOption, monitoringOption, lovableKeyOption, dbPasswordOption,
+    pathOption, nameOption, orgOption, modeOption, monitoringOption, persistentStorageOption, deployScriptOption,
+    lovableKeyOption, dbPasswordOption,
     userNameOption, userEmailOption, userPasswordOption,
     syncProjectRefOption, syncServiceKeyOption, syncDbPasswordOption, syncManagementTokenOption,
     remoteProjectRefOption, remoteServiceKeyOption,
@@ -83,6 +92,8 @@ initCommand.SetAction(parseResult =>
         OrganizationName = parseResult.GetValue(orgOption)!,
         Mode = mode,
         AddMonitoring = parseResult.GetValue(monitoringOption),
+        AddPersistentStorage = parseResult.GetValue(persistentStorageOption),
+        AddDeployScript = parseResult.GetValue(deployScriptOption),
         LovableApiKey = parseResult.GetValue(lovableKeyOption),
         DatabasePassword = parseResult.GetValue(dbPasswordOption)!,
         User = new DefaultUser(

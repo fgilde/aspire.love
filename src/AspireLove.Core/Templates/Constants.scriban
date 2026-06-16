@@ -17,6 +17,18 @@ internal static class Constants
         public static readonly (string Name, string Email, string Password) Default =
             ("{{ UserName }}", "{{ UserEmail }}", "{{ UserPassword }}");
     }
+{{~ if AddPersistentStorage }}
+
+    /// <summary>Persistent Supabase Storage for deployments (Azure Files NFS + MinIO S3).
+    /// Change the MinIO root password before deploying to a real environment.</summary>
+    public static class Storage
+    {
+        public const string NfsName = "{{ NfsStorageName }}";
+        public const string VnetName = "{{ StorageVnetName }}";
+        public const string MinioRootUser = "{{ MinioRootUser }}";
+        public const string MinioRootPassword = "{{ MinioRootPassword }}";
+    }
+{{~ end ~}}
 {{~ if HasLovableApiKey }}
 
     /// <summary>Lovable AI gateway key, wired into the edge runtime so built-in AI keeps working.</summary>

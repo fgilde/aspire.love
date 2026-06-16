@@ -51,6 +51,8 @@ Pick a mode with `--mode` (default: `FullLocal`):
 | `--organization` | `-o` | `My Company` | Organization name shown in Supabase Studio. |
 | `--mode` | `-m` | `FullLocal` | `FullLocal`, `SupabaseSync` or `RemoteConnect`. |
 | `--monitoring` | | off | Add the Grafana/Tempo/OpenTelemetry observability stack (local modes only). |
+| `--persistent-storage` | | off | Persist Supabase Storage when deployed (Azure Files NFS + MinIO S3; local modes only). |
+| `--deploy-script` | | off | Generate a guided `scripts/deploy.ps1` for deploying to Azure with azd. |
 | `--lovable-api-key` | | — | Lovable AI gateway key, so the project's built-in AI keeps working locally. |
 | `--db-password` | | `local-dev-password-123` | Local Postgres password. |
 | `--user-name` | | `admin` | Default admin user name. |

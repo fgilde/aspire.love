@@ -159,6 +159,23 @@ public class GenerationValidatorTests
     }
 
     [Fact]
+    public void Persistent_storage_with_remote_connect_is_an_error()
+    {
+        using var project = new TempProject().WithPackageName("app");
+
+        var result = GenerationValidator.Validate(new GenerationOptions
+        {
+            LovableProjectPath = project.Path,
+            Mode = GenerationMode.RemoteConnect,
+            RemoteInfo = new RemoteConnectInfo("ref", "key"),
+            AddPersistentStorage = true,
+        });
+
+        Assert.False(result.IsValid);
+        Assert.Contains(result.Errors, m => m.Text.Contains("Persistent storage"));
+    }
+
+    [Fact]
     public void Existing_aspire_folder_warns_about_overwrite()
     {
         using var project = new TempProject().WithPackageName("app").WithSupabaseLayout();

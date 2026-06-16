@@ -79,6 +79,8 @@ aspire-love update # check for and install the latest version of aspire.love
 | `--organization`, `-o` | Organization name shown in Supabase Studio. | `My Company` |
 | `--mode`, `-m` | `FullLocal`, `SupabaseSync` or `RemoteConnect`. | `FullLocal` |
 | `--monitoring` | Add the Grafana/Tempo/OpenTelemetry stack (local modes only). | off |
+| `--persistent-storage` | Persist Supabase Storage when deployed (Azure Files NFS + MinIO S3; local modes only). | off |
+| `--deploy-script` | Generate a guided `scripts/deploy.ps1` for deploying to Azure with azd. | off |
 | `--lovable-api-key` | Lovable AI gateway key, so the project's built-in AI keeps working locally. | — |
 | `--db-password` | Local Postgres password. | `local-dev-password-123` |
 | `--user-name` / `--user-email` / `--user-password` | Default admin user seeded into Supabase / Studio. | `admin` / `admin@localhost` / `admin` |

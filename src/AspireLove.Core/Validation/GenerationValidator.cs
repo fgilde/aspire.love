@@ -16,6 +16,7 @@ public static class GenerationValidator
         ValidateProjectPath(options, result);
         ValidateModeRequirements(options, result);
         ValidateMonitoring(options, result);
+        ValidatePersistentStorage(options, result);
         ValidateExistingOutput(options, result);
 
         return result;
@@ -92,6 +93,12 @@ public static class GenerationValidator
     {
         if (options.AddMonitoring && !options.UsesLocalSupabase)
             result.AddError("Monitoring is only available with a local Supabase stack (Full Local or Supabase Sync).");
+    }
+
+    private static void ValidatePersistentStorage(GenerationOptions options, ValidationResult result)
+    {
+        if (options.AddPersistentStorage && !options.UsesLocalSupabase)
+            result.AddError("Persistent storage only applies to a deployed Supabase stack (Full Local or Supabase Sync).");
     }
 
     private static void ValidateExistingOutput(GenerationOptions options, ValidationResult result)

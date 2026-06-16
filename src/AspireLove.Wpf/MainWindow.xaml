@@ -164,6 +164,13 @@
                                              IsChecked="{Binding AddMonitoring}"
                                              IsEnabled="{Binding UsesLocalSupabase}" Margin="0,0,0,8" />
 
+                            <ui:ToggleSwitch Content="Persistent storage when deployed (Azure Files NFS + MinIO)"
+                                             IsChecked="{Binding AddPersistentStorage}"
+                                             IsEnabled="{Binding UsesLocalSupabase}" Margin="0,0,0,8" />
+
+                            <ui:ToggleSwitch Content="Add deploy script (scripts/deploy.ps1 for azd)"
+                                             IsChecked="{Binding AddDeployScript}" Margin="0,0,0,8" />
+
                             <TextBlock Text="Database password (local Postgres)"
                                        Opacity="0.7" Margin="0,0,0,2"
                                        Visibility="{Binding UsesLocalSupabase, Converter={StaticResource BoolToVisibility}}" />

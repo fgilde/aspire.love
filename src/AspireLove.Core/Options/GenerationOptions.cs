@@ -30,6 +30,16 @@ public sealed record GenerationOptions
     /// <summary>Adds the Grafana/Tempo/OTel observability stack. Only valid with a local stack.</summary>
     public bool AddMonitoring { get; init; }
 
+    /// <summary>
+    /// When deploying, back Supabase Storage with a persistent Azure Files (NFS) share plus a
+    /// MinIO S3 endpoint, so uploaded files survive container restarts. Only meaningful for the
+    /// modes that actually deploy a Supabase stack (Full Local / Supabase Sync).
+    /// </summary>
+    public bool AddPersistentStorage { get; init; }
+
+    /// <summary>Generates a guided <c>scripts/deploy.ps1</c> for deploying to Azure with azd.</summary>
+    public bool AddDeployScript { get; init; }
+
     /// <summary>Password for the local Postgres database (local modes only).</summary>
     public string DatabasePassword { get; init; } = "local-dev-password-123";
 

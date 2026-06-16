@@ -91,14 +91,17 @@ public sealed class MainViewModel : ObservableObject
             if (!SetField(ref _mode, value))
                 return;
 
-            // Monitoring is only meaningful with a local stack — clear it otherwise.
+            // Monitoring and persistent storage only matter with a local stack — clear them otherwise.
             if (!UsesLocalSupabase && AddMonitoring)
                 _addMonitoring = false;
+            if (!UsesLocalSupabase && AddPersistentStorage)
+                _addPersistentStorage = false;
 
             OnPropertyChanged(nameof(UsesLocalSupabase));
             OnPropertyChanged(nameof(IsSyncMode));
             OnPropertyChanged(nameof(IsRemoteMode));
             OnPropertyChanged(nameof(AddMonitoring));
+            OnPropertyChanged(nameof(AddPersistentStorage));
             OnPropertyChanged(nameof(ModeDescription));
             OnInputChanged();
         }
@@ -109,6 +112,20 @@ public sealed class MainViewModel : ObservableObject
     {
         get => _addMonitoring;
         set { if (SetField(ref _addMonitoring, value)) OnInputChanged(); }
+    }
+
+    private bool _addPersistentStorage;
+    public bool AddPersistentStorage
+    {
+        get => _addPersistentStorage;
+        set { if (SetField(ref _addPersistentStorage, value)) OnInputChanged(); }
+    }
+
+    private bool _addDeployScript;
+    public bool AddDeployScript
+    {
+        get => _addDeployScript;
+        set { if (SetField(ref _addDeployScript, value)) OnInputChanged(); }
     }
 
     private bool _dryRun;
@@ -266,10 +283,20 @@ public sealed class MainViewModel : ObservableObject
         if (_aspireProject is not { } project)
             return;
 
-        // `azd up` provisions and deploys to Azure Container Apps. It is interactive (subscription,
-        // location, confirmation prompts), so it must run in a visible terminal.
-        if (OpenTerminal(project.AppHostDirectory, "azd up"))
+        // Prefer the generated guided deploy script if it exists — it picks the Azure account/tenant
+        // and environment interactively, then runs azd. Otherwise fall back to a plain `azd up`.
+        // Both are interactive, so they must run in a visible terminal.
+        var scriptPath = Path.Combine(project.AspireRoot, "scripts", "deploy.ps1");
+        if (File.Exists(scriptPath))
+        {
+            if (OpenTerminal(Path.GetDirectoryName(scriptPath)!,
+                    "powershell -NoProfile -ExecutionPolicy Bypass -File deploy.ps1"))
+                StatusMessage = "Running the deploy script (scripts/deploy.ps1) in a new terminal…";
+        }
+        else if (OpenTerminal(project.AppHostDirectory, "azd up"))
+        {
             StatusMessage = "Publishing with 'azd up' in a new terminal…";
+        }
     }
 
     private bool OpenTerminal(string workingDirectory, string command)
@@ -360,6 +387,8 @@ public sealed class MainViewModel : ObservableObject
         LovableApiKey = string.IsNullOrWhiteSpace(LovableApiKey) ? null : LovableApiKey,
         Mode = Mode,
         AddMonitoring = AddMonitoring,
+        AddPersistentStorage = AddPersistentStorage,
+        AddDeployScript = AddDeployScript,
         DatabasePassword = DatabasePassword,
         SyncInfo = IsSyncMode
             ? new SupabaseSyncInfo(SyncProjectRef, SyncServiceKey, SyncDbPassword, SyncManagementToken)

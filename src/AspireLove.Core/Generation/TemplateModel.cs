@@ -43,6 +43,18 @@ public sealed class TemplateModel
         AddMonitoring = options.AddMonitoring && options.UsesLocalSupabase;
         DatabasePassword = options.DatabasePassword;
 
+        // Persistent storage only makes sense when we actually deploy a Supabase stack.
+        AddPersistentStorage = options.AddPersistentStorage && options.UsesLocalSupabase;
+        AddDeployScript = options.AddDeployScript;
+
+        // Azure storage account names must be 3-24 chars, lowercase alphanumeric only.
+        var storageStem = new string(slug.Where(char.IsLetterOrDigit).ToArray()).ToLowerInvariant();
+        if (storageStem.Length == 0) storageStem = "aspirelove";
+        NfsStorageName = (storageStem.Length > 21 ? storageStem[..21] : storageStem) + "nfs";
+        StorageVnetName = $"{slug}-vnet";
+        MinioRootUser = $"{slug}-minio-admin";
+        MinioRootPassword = "Change-This-Minio-Password-2026!";
+
         if (options.SyncInfo is { } sync)
         {
             SyncProjectRef = sync.ProjectRef;
@@ -62,9 +74,9 @@ public sealed class TemplateModel
     }
 
     // Package versions used by the generated csproj. Bump in one place.
-    public string AspireSdkVersion => "13.3.5";
-    public string AspireVersion => "13.3.5";
-    public string NextendedSupabaseVersion => "10.1.9";
+    public string AspireSdkVersion => "13.4.4";
+    public string AspireVersion => "13.4.4";
+    public string NextendedSupabaseVersion => "10.1.10";
 
     public string DisplayProjectName { get; }
     public string ProjectIdentifier { get; }
@@ -91,6 +103,13 @@ public sealed class TemplateModel
 
     public bool AddMonitoring { get; }
     public string DatabasePassword { get; }
+
+    public bool AddPersistentStorage { get; }
+    public bool AddDeployScript { get; }
+    public string NfsStorageName { get; }
+    public string StorageVnetName { get; }
+    public string MinioRootUser { get; }
+    public string MinioRootPassword { get; }
 
     public string? SyncProjectRef { get; }
     public string? SyncServiceKey { get; }

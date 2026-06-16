@@ -41,6 +41,12 @@ public sealed class ProjectGenerator
             files.Add(new("observability/grafana/dashboards/.gitkeep", string.Empty));
         }
 
+        if (model.AddDeployScript)
+        {
+            // Guided azd deployment helper (PowerShell). Sits next to the solution under scripts/.
+            files.Add(new("scripts/deploy.ps1", _renderer.Render("DeployScript.ps1", model)));
+        }
+
         return files;
     }
 

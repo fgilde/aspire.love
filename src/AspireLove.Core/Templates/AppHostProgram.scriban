@@ -25,8 +25,24 @@ var builder = DistributedApplication.CreateBuilder(args);
 // as the deployment target. Has no effect during local development.
 if (builder.ExecutionContext.IsPublishMode)
 {
+{{~ if AddPersistentStorage ~}}
+    var containerEnv = builder.AddAzureContainerAppEnvironment("azure-container-env")
+        .WithAzdResourceNaming();
+
+    // Persist Supabase Storage across deployments: an Azure Files (NFS) share backs a
+    // MinIO S3 endpoint the stack writes to, so uploaded files survive container restarts.
+    // Names and the MinIO root credentials live in Constants.cs — change them before going live.
+    builder.AddSupabaseNfsStorage(containerEnv,
+        nfsEnvStorageName: Constants.Storage.NfsName,
+        vnetName: Constants.Storage.VnetName);
+    builder.AddMinioS3OnNfs(
+        nfsEnvStorageName: Constants.Storage.NfsName,
+        rootUser: Constants.Storage.MinioRootUser,
+        rootPassword: Constants.Storage.MinioRootPassword);
+{{~ else ~}}
     builder.AddAzureContainerAppEnvironment("azure-container-env")
         .WithAzdResourceNaming();
+{{~ end ~}}
 }
 {{~ if IsFullLocal }}
 
