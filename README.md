@@ -104,6 +104,10 @@ aspire-love update # check for and install the latest version of aspire.love
   can log in immediately.
 - **Azure-ready** — a Container Apps publish target is provisioned automatically, so
   deploying with `azd up` needs no extra wiring.
+- **Persistent storage** *(optional)* — back Supabase Storage with an Azure Files (NFS) share
+  and a MinIO S3 endpoint, so uploaded files survive container restarts when deployed.
+- **One-command deploy** *(optional)* — generate a guided `scripts/deploy.ps1` that signs into
+  the right Azure tenant and runs `azd`; the desktop app's Publish button runs it for you.
 
 ## Under the hood
 

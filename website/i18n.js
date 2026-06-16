@@ -61,6 +61,10 @@ window.I18N = {
         "features.f5b": "A default admin user is registered in Supabase and Studio so you can log in immediately.",
         "features.f6t": "Azure-ready",
         "features.f6b": "A Container Apps publish target is provisioned automatically, so deploying with azd up needs no extra wiring.",
+        "features.f7t": "Persistent storage",
+        "features.f7b": "Optionally back Supabase Storage with an Azure Files (NFS) share and a MinIO S3 endpoint, so uploaded files survive container restarts in the cloud.",
+        "features.f8t": "One-command deploy",
+        "features.f8b": "Generate a guided deploy.ps1 that signs into the right Azure tenant and runs azd — or just hit Publish in the desktop app.",
 
         "studio.title": "Or skip the CLI — use the desktop app",
         "studio.lead": "aspire.love Studio is a modern Fluent app built on the exact same generation core. Every option is right there, with live validation and a code preview that updates as you type.",
@@ -199,6 +203,10 @@ window.I18N = {
         "features.f5b": "Ein Standard-Admin wird in Supabase und Studio registriert, sodass du dich sofort anmelden kannst.",
         "features.f6t": "Azure-ready",
         "features.f6b": "Ein Container-Apps-Publish-Target wird automatisch bereitgestellt — Deployen mit azd up braucht keine Extra-Konfiguration.",
+        "features.f7t": "Persistenter Storage",
+        "features.f7b": "Optional Supabase Storage mit einer Azure-Files-(NFS)-Freigabe und einem MinIO-S3-Endpunkt hinterlegen, damit hochgeladene Dateien Container-Neustarts in der Cloud überstehen.",
+        "features.f8t": "Deploy per Befehl",
+        "features.f8b": "Generiere ein geführtes deploy.ps1, das sich am richtigen Azure-Tenant anmeldet und azd ausführt — oder klick im Desktop-Tool einfach auf Publish.",
 
         "studio.title": "Oder ohne CLI — nimm die Desktop-App",
         "studio.lead": "aspire.love Studio ist eine moderne Fluent-App auf demselben Generierungs-Core. Jede Option ist direkt da — mit Live-Validierung und einer Code-Vorschau, die sich beim Tippen aktualisiert.",
