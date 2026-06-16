@@ -243,6 +243,20 @@ public class ProjectGeneratorTests
     }
 
     [Fact]
+    public void Deploy_script_is_pure_ascii()
+    {
+        using var project = new TempProject().WithPackageName("app");
+
+        var script = _generator.Generate(FullLocal(project.Path) with { AddDeployScript = true })
+            .Single(f => f.RelativePath == "scripts/deploy.ps1").Content;
+
+        // A non-ASCII char (e.g. an em dash) in a .ps1 breaks Windows PowerShell 5.1 parsing when
+        // the file is read without a BOM — keep the script ASCII so it's safe regardless.
+        var offender = script.FirstOrDefault(c => c > '\x7F');
+        Assert.True(offender == default, $"deploy.ps1 contains a non-ASCII character: U+{(int)offender:X4}");
+    }
+
+    [Fact]
     public void Csproj_pins_expected_package_versions()
     {
         using var project = new TempProject().WithPackageName("app");

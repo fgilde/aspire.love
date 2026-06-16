@@ -44,13 +44,22 @@ public sealed class AspireLoveGenerator
         return new GenerationOutcome(aspireRoot, files, FilesWritten: true, packageJson);
     }
 
+    // Windows PowerShell 5.1 reads a .ps1 without a BOM as the system ANSI codepage, which
+    // mojibakes any non-ASCII character (an em dash, an umlaut in the project name…) and breaks
+    // parsing. Writing a UTF-8 BOM makes both PowerShell 5.1 and 7 decode the script correctly.
+    private static readonly System.Text.UTF8Encoding Utf8WithBom = new(encoderShouldEmitUTF8Identifier: true);
+
     private static void WriteFiles(string aspireRoot, IReadOnlyList<GeneratedFile> files)
     {
         foreach (var file in files)
         {
             var fullPath = Path.Combine(aspireRoot, file.RelativePath.Replace('/', Path.DirectorySeparatorChar));
             Directory.CreateDirectory(Path.GetDirectoryName(fullPath)!);
-            File.WriteAllText(fullPath, file.Content);
+
+            if (fullPath.EndsWith(".ps1", StringComparison.OrdinalIgnoreCase))
+                File.WriteAllText(fullPath, file.Content, Utf8WithBom);
+            else
+                File.WriteAllText(fullPath, file.Content);
         }
     }
 }

@@ -65,7 +65,7 @@ Push-Location $AppHostDir
 try {
     # -----------------------------------------------------------------------
     # 2. Pick environment FIRST. azd environments are LOCAL (.azure/, gitignored).
-    #    A fresh machine has none — typing the name creates it (step 5).
+    #    A fresh machine has none - typing the name creates it (step 5).
     # -----------------------------------------------------------------------
     $existingEnvs = @()
     try {
@@ -76,7 +76,7 @@ try {
         if ($NonInteractive) { Write-Error "-Environment required in non-interactive mode."; exit 1 }
         Write-Host ""
         Write-Host "Your local azd environments:" -ForegroundColor Yellow
-        if ($existingEnvs.Count -eq 0) { Write-Host "  (none yet — type a name to create one)" }
+        if ($existingEnvs.Count -eq 0) { Write-Host "  (none yet - type a name to create one)" }
         else { $existingEnvs | ForEach-Object { Write-Host "  - $_" } }
         $current = ""
         try { $current = (azd env get-value AZURE_ENV_NAME 2>$null) } catch { $current = "" }
@@ -109,7 +109,7 @@ try {
     Write-Host "Region: $envLocation" -ForegroundColor Green
 
     # -----------------------------------------------------------------------
-    # 3. Azure CLI — SHOW the current account, let you confirm or switch.
+    # 3. Azure CLI - SHOW the current account, let you confirm or switch.
     # -----------------------------------------------------------------------
     $account = $null
     try { $account = az account show 2>$null | ConvertFrom-Json } catch { $account = $null }
@@ -124,7 +124,7 @@ try {
             if (-not (Confirm-Yes "Deploy with THIS account/subscription?")) { $account = $null }
         }
         if (-not $account) {
-            Write-Host "Switching account — a browser will open. Pick the account you want to deploy with." -ForegroundColor Yellow
+            Write-Host "Switching account - a browser will open. Pick the account you want to deploy with." -ForegroundColor Yellow
             az login | Out-Null
             $subs = az account list --query "[].{name:name, id:id, tenantId:tenantId}" | ConvertFrom-Json
             if ($subs.Count -gt 1) {
@@ -145,12 +145,12 @@ try {
     Write-Host "az: $($account.user.name) / $($account.name) / tenant $targetTenant" -ForegroundColor Green
 
     # -----------------------------------------------------------------------
-    # 4. azd auth — separate login; point it at the SAME tenant you just chose.
+    # 4. azd auth - separate login; point it at the SAME tenant you just chose.
     # -----------------------------------------------------------------------
     if (-not $NonInteractive) {
         Write-Host ""
         Write-Host "azd auth login --tenant-id $targetTenant" -ForegroundColor Yellow
-        Write-Host "(In the browser, sign in as '$($account.user.name)' — the SAME account as above.)" -ForegroundColor Gray
+        Write-Host "(In the browser, sign in as '$($account.user.name)' - the SAME account as above.)" -ForegroundColor Gray
         azd auth login --tenant-id $targetTenant | Out-Null
         if ($LASTEXITCODE -ne 0) { Write-Error "azd auth login failed for tenant $targetTenant."; exit 1 }
     } else {
@@ -166,7 +166,7 @@ try {
     # -----------------------------------------------------------------------
     if ($existingEnvs -notcontains $Environment) {
         Write-Host ""
-        Write-Host "Environment '$Environment' doesn't exist locally yet — creating it (sub=$($account.id), location=$envLocation)." -ForegroundColor Yellow
+        Write-Host "Environment '$Environment' doesn't exist locally yet - creating it (sub=$($account.id), location=$envLocation)." -ForegroundColor Yellow
         azd env new $Environment --subscription $account.id --location $envLocation
         if ($LASTEXITCODE -ne 0) { Write-Error "Failed to create environment '$Environment'."; exit 1 }
     }
@@ -176,7 +176,7 @@ try {
     if ($LASTEXITCODE -ne 0) { Write-Error "Could not select environment '$Environment'."; exit 1 }
 
     # A pre-existing env may point at a DIFFERENT subscription than the account you just chose.
-    # Offer to re-point it — that's almost always what you mean when you pick an account.
+    # Offer to re-point it - that's almost always what you mean when you pick an account.
     $localSub = (azd env get-value AZURE_SUBSCRIPTION_ID 2>$null)
     if ($localSub -and $localSub -ne $account.id) {
         Write-Host ""
@@ -226,8 +226,8 @@ try {
         else {
             Write-Host ""
             Write-Host "Deploy mode:" -ForegroundColor Yellow
-            Write-Host "  [1] up     — provision infra + deploy code (first time / infra changed / provision unfinished)"
-            Write-Host "  [2] deploy — code only (fast; ONLY works once a full 'up' has succeeded)"
+            Write-Host "  [1] up     - provision infra + deploy code (first time / infra changed / provision unfinished)"
+            Write-Host "  [2] deploy - code only (fast; ONLY works once a full 'up' has succeeded)"
             if (-not $provisioned) {
                 Write-Host "  -> Provisioning isn't complete for '$Environment' (no registry endpoint yet); 'deploy' will fail. Defaulting to up." -ForegroundColor Yellow
             }
@@ -236,7 +236,7 @@ try {
         }
     }
 
-    # Guard: deploy without completed provisioning can't work — force up.
+    # Guard: deploy without completed provisioning can't work - force up.
     if ($Mode -eq "deploy" -and -not $provisioned) {
         Write-Host "Provisioning not complete (no AZURE_CONTAINER_REGISTRY_ENDPOINT). Switching to 'up'." -ForegroundColor Yellow
         $Mode = "up"
