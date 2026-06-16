@@ -19,7 +19,7 @@
     <RootNamespace>AspireLove.Studio</RootNamespace>
     <AssemblyName>AspireLove.Wpf</AssemblyName>
     <ApplicationIcon>Assets\aspire.love.ico</ApplicationIcon>
-    <Version>0.0.6</Version>
+    <Version>0.0.7</Version>
     <!-- Velopack needs to run its install/update hooks before WPF starts up — see Program.cs. -->
     <StartupObject>AspireLove.Studio.Program</StartupObject>
   </PropertyGroup>
