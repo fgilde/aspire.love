@@ -23,6 +23,10 @@ public sealed class MainViewModel : ObservableObject
     // Coalesces rapid keystrokes so we re-render the preview once typing settles, not per character.
     private readonly DispatcherTimer _previewDebounce;
 
+    // Set while we bulk-assign fields (loading an existing project) so each assignment doesn't
+    // trigger validation/preview churn — we refresh once at the end instead.
+    private bool _suppressInputHandling;
+
     public MainViewModel()
     {
         _previewDebounce = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(250) };
@@ -36,6 +40,7 @@ public sealed class MainViewModel : ObservableObject
         GenerateCommand = new RelayCommand(Generate, () => IsValid && !DryRun);
         LaunchCommand = new RelayCommand(Launch, () => AspireProjectExists);
         PublishCommand = new RelayCommand(Publish, () => AspireProjectExists);
+        LoadExistingCommand = new RelayCommand(LoadExisting, () => AspireProjectExists);
         Revalidate();
         RefreshPreview();
         UpdateAspireProjectState();
@@ -198,6 +203,7 @@ public sealed class MainViewModel : ObservableObject
                 return;
             LaunchCommand.RaiseCanExecuteChanged();
             PublishCommand.RaiseCanExecuteChanged();
+            LoadExistingCommand.RaiseCanExecuteChanged();
         }
     }
 
@@ -210,6 +216,53 @@ public sealed class MainViewModel : ObservableObject
     public RelayCommand GenerateCommand { get; }
     public RelayCommand LaunchCommand { get; }
     public RelayCommand PublishCommand { get; }
+    public RelayCommand LoadExistingCommand { get; }
+
+    /// <summary>Reads the settings back out of an already-generated aspire folder and fills the
+    /// form, so the user can tweak and regenerate without re-entering everything.</summary>
+    private void LoadExisting()
+    {
+        if (!ExistingProjectReader.TryRead(LovableProjectPath, out var o))
+        {
+            StatusMessage = "Couldn't read settings from the existing aspire project.";
+            return;
+        }
+
+        _suppressInputHandling = true;
+        try
+        {
+            _projectName = o.ProjectName ?? "";
+            _organizationName = o.OrganizationName;
+            _userName = o.User.Name;
+            _userEmail = o.User.Email;
+            _userPassword = o.User.Password;
+            _databasePassword = o.DatabasePassword;
+            _lovableApiKey = o.LovableApiKey ?? "";
+            _mode = o.Mode;
+            _addMonitoring = o.AddMonitoring;
+            _addPersistentStorage = o.AddPersistentStorage;
+            _addDeployScript = o.AddDeployScript;
+
+            _syncProjectRef = o.SyncInfo?.ProjectRef ?? "";
+            _syncServiceKey = o.SyncInfo?.ServiceKey ?? "";
+            _syncDbPassword = o.SyncInfo?.DbPassword ?? "";
+            _syncManagementToken = o.SyncInfo?.ManagementToken ?? "";
+
+            _remoteProjectRef = o.RemoteInfo?.ProjectRef ?? "";
+            _remoteServiceKey = o.RemoteInfo?.ServiceKey ?? "";
+        }
+        finally
+        {
+            _suppressInputHandling = false;
+        }
+
+        // One bulk refresh of every binding, then re-validate and re-render the preview.
+        OnPropertyChanged(string.Empty);
+        UpdateResolvedNameHint();
+        Revalidate();
+        RefreshPreview();
+        StatusMessage = "Loaded settings from the existing aspire project. Tweak anything and hit Generate.";
+    }
 
     private void Browse()
     {
@@ -332,6 +385,9 @@ public sealed class MainViewModel : ObservableObject
 
     private void OnInputChanged(bool resolveName = false)
     {
+        if (_suppressInputHandling)
+            return;
+
         if (resolveName)
         {
             UpdateResolvedNameHint();
