@@ -40,7 +40,6 @@ public sealed class MainViewModel : ObservableObject
         GenerateCommand = new RelayCommand(Generate, () => IsValid && !DryRun);
         LaunchCommand = new RelayCommand(Launch, () => AspireProjectExists);
         PublishCommand = new RelayCommand(Publish, () => AspireProjectExists);
-        LoadExistingCommand = new RelayCommand(LoadExisting, () => AspireProjectExists);
         Revalidate();
         RefreshPreview();
         UpdateAspireProjectState();
@@ -203,7 +202,6 @@ public sealed class MainViewModel : ObservableObject
                 return;
             LaunchCommand.RaiseCanExecuteChanged();
             PublishCommand.RaiseCanExecuteChanged();
-            LoadExistingCommand.RaiseCanExecuteChanged();
         }
     }
 
@@ -216,17 +214,14 @@ public sealed class MainViewModel : ObservableObject
     public RelayCommand GenerateCommand { get; }
     public RelayCommand LaunchCommand { get; }
     public RelayCommand PublishCommand { get; }
-    public RelayCommand LoadExistingCommand { get; }
 
-    /// <summary>Reads the settings back out of an already-generated aspire folder and fills the
-    /// form, so the user can tweak and regenerate without re-entering everything.</summary>
-    private void LoadExisting()
+    /// <summary>When a folder with an already-generated aspire project is selected, read its
+    /// settings back into the form so the user can tweak and regenerate without re-entering
+    /// everything. Best-effort: if the files can't be parsed, the form is left untouched.</summary>
+    private bool LoadExistingSettings()
     {
         if (!ExistingProjectReader.TryRead(LovableProjectPath, out var o))
-        {
-            StatusMessage = "Couldn't read settings from the existing aspire project.";
-            return;
-        }
+            return false;
 
         _suppressInputHandling = true;
         try
@@ -262,6 +257,7 @@ public sealed class MainViewModel : ObservableObject
         Revalidate();
         RefreshPreview();
         StatusMessage = "Loaded settings from the existing aspire project. Tweak anything and hit Generate.";
+        return true;
     }
 
     private void Browse()
@@ -392,6 +388,12 @@ public sealed class MainViewModel : ObservableObject
         {
             UpdateResolvedNameHint();
             UpdateAspireProjectState();
+
+            // Picking a folder that already has a generated aspire project? Pull its settings
+            // into the form automatically so the user can tweak and regenerate. It refreshes
+            // validation/preview itself, so we're done for this change.
+            if (AspireProjectExists && LoadExistingSettings())
+                return;
         }
 
         Revalidate();

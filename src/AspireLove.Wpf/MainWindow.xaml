@@ -238,9 +238,6 @@
                                Opacity="0.55" FontSize="11" Margin="0,2,0,0" />
                 </StackPanel>
                 <StackPanel Grid.Column="1" Orientation="Horizontal">
-                    <ui:Button Content="Load settings"
-                               Command="{Binding LoadExistingCommand}" Margin="0,0,8,0"
-                               ToolTip="Read the settings back out of the existing aspire project and fill the form." />
                     <ui:Button Content="Launch"
                                Command="{Binding LaunchCommand}" Margin="0,0,8,0"
                                ToolTip="Run 'dotnet run' on the generated AppHost in a new terminal." />
