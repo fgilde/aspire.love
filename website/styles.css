@@ -152,6 +152,7 @@ section { padding: clamp(56px, 9vw, 120px) clamp(20px, 5vw, 48px); }
     pointer-events: none;
 }
 .shot-frame img { display: block; width: 100%; height: auto; }
+.shot-cap { text-align: center; color: var(--text-dim); font-size: 0.9rem; padding: 12px 16px; }
 .studio-cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 40px; }
 
 /* ---- Independence highlight ---- */
