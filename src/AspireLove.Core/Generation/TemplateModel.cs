@@ -74,9 +74,9 @@ public sealed class TemplateModel
     }
 
     // Package versions used by the generated csproj. Bump in one place.
-    public string AspireSdkVersion => "13.4.4";
-    public string AspireVersion => "13.4.4";
-    public string NextendedSupabaseVersion => "10.1.10";
+    public string AspireSdkVersion => "13.4.6";
+    public string AspireVersion => "13.4.6";
+    public string NextendedSupabaseVersion => "10.1.14";
 
     public string DisplayProjectName { get; }
     public string ProjectIdentifier { get; }
