@@ -225,6 +225,8 @@ section { padding: clamp(56px, 9vw, 120px) clamp(20px, 5vw, 48px); }
     font-size: 1.12rem;
 }
 .hero-cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+/* When a screenshot follows the hero buttons directly (AspireUI page), give it breathing room. */
+.hero-cta + .shot-frame { margin-top: 44px; }
 
 /* ---- Hero deploy strip ---- */
 .deploy-strip { margin: 40px auto 0; max-width: 760px; }
