@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AspireUI — build .NET Aspire visually · aspire.love</title>
+    <title>AspireUI — build, run & host .NET Aspire visually · aspire.love</title>
     <meta name="description"
           data-i18n="aui.meta"
-          content="AspireUI is a visual canvas for .NET Aspire AppHost projects: drag out resources, wire references, watch the C# update live, then run the stack and jump into the Aspire dashboard." />
+          content="AspireUI is a visual canvas for .NET Aspire: drag out resources, edit real C# with IntelliSense, run stacks with live resource status, publish to Compose/Kubernetes/Bicep — and host apps like an app store with 139+ ready-made containers." />
     <link rel="icon" href="../assets/favicon.ico" sizes="any" />
     <link rel="apple-touch-icon" href="../assets/favicon.ico" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="aspire.love" />
     <meta property="og:url" content="https://www.aspire.love/aspireui" />
-    <meta property="og:title" content="AspireUI — build .NET Aspire visually" />
+    <meta property="og:title" content="AspireUI — build, run & host .NET Aspire visually" />
     <meta property="og:description"
-          content="A visual canvas for .NET Aspire AppHost projects: drag resources, wire references, live C# preview, run the stack and open the dashboard." />
-    <meta property="og:image" content="https://www.aspire.love/assets/aspireui-hero.png" />
+          content="A visual canvas for .NET Aspire: drag resources, edit real C#, run with live status, publish to Compose/K8s/Bicep, and host 139+ apps like an app store." />
+    <meta property="og:image" content="https://www.aspire.love/assets/aspireui-editor.png" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="AspireUI — build .NET Aspire visually" />
-    <meta name="twitter:image" content="https://www.aspire.love/assets/aspireui-hero.png" />
+    <meta name="twitter:title" content="AspireUI — build, run & host .NET Aspire visually" />
+    <meta name="twitter:image" content="https://www.aspire.love/assets/aspireui-editor.png" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -38,16 +38,17 @@
         <nav class="nav-links">
             <a href="../#top" data-i18n="aui.nav.home">← aspire.love</a>
             <a href="#features" data-i18n="nav.features">Features</a>
+            <a href="#hosting" data-i18n="aui.nav.hosting">Hosting</a>
             <a href="#start" data-i18n="nav.start">Get started</a>
         </nav>
         <div class="nav-actions">
-            <a class="nav-icon" href="https://github.com/fgilde/AspireUi" target="_blank" rel="noopener"
+            <a class="nav-icon" href="https://github.com/fgilde/AspireUI" target="_blank" rel="noopener"
                aria-label="View AspireUI on GitHub" title="GitHub">
                 <svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" fill="currentColor">
                     <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"></path>
                 </svg>
             </a>
-            <a class="btn btn-primary btn-sm" href="https://github.com/fgilde/AspireUi" target="_blank" rel="noopener"
+            <a class="btn btn-primary btn-sm" href="https://github.com/fgilde/AspireUI" target="_blank" rel="noopener"
                data-i18n="aui.nav.github">View on GitHub</a>
             <button class="lang-toggle" id="langToggle" aria-label="Toggle language">
                 <span data-lang="en" class="active">EN</span>
@@ -60,15 +61,17 @@
     <main id="top">
         <!-- ============================ Hero ============================ -->
         <section class="hero">
+            <img class="aui-wordmark" src="../assets/aspireui-wordmark.svg" alt="AspireUI" />
             <span class="eyebrow" data-i18n="aui.eyebrow">.NET Aspire · visual · open source</span>
             <h1 class="hero-title">
-                <span data-i18n="aui.title1">Build your Aspire stack</span>
+                <span data-i18n="aui.title1">Build, run &amp; host Aspire</span>
                 <span class="gradient" data-i18n="aui.title2">by dragging, not typing.</span>
             </h1>
             <p class="hero-sub" data-i18n="aui.sub">
-                AspireUI is a visual canvas for .NET Aspire AppHost projects. Drag out resources, wire up
-                references, tweak properties in a grid, and watch the generated C# update live — then run
-                the stack and jump straight into the Aspire dashboard.
+                AspireUI is a visual canvas for .NET Aspire. Drag out resources and wire references, or edit
+                real C# with Roslyn IntelliSense — both stay in sync. Run a stack and watch live per-resource
+                status, publish to Docker Compose, Kubernetes, Bicep or an Aspire manifest, and even host apps
+                like an app store, with 139+ ready-made containers.
             </p>
             <div class="hero-cta">
                 <a class="btn btn-primary" href="#start" data-i18n="aui.cta1">Get started</a>
@@ -76,8 +79,8 @@
                    data-i18n="aui.cta2">Read the docs</a>
             </div>
             <figure class="shot-frame">
-                <img src="../assets/aspireui-hero.png"
-                     alt="The AspireUI workspace: a resource palette on the left, a canvas of wired resources in the middle, a live Program.cs preview at the bottom and a property grid on the right."
+                <img src="../assets/aspireui-editor.png"
+                     alt="The AspireUI editor: a resource palette, a canvas of wired resources, a live C# code editor and a property grid."
                      loading="lazy" />
             </figure>
         </section>
@@ -88,84 +91,140 @@
                 <h2 class="section-title" data-i18n="aui.rel.title">The visual companion to aspire.love</h2>
                 <p class="section-lead" data-i18n="aui.rel.lead">
                     aspire.love frees your Lovable project into a .NET Aspire solution. AspireUI is where you
-                    <em>compose</em> Aspire stacks visually — same ecosystem, no hand-written AppHost required.
+                    <em>compose, run and host</em> Aspire stacks visually — same ecosystem, no hand-written
+                    AppHost required.
                 </p>
             </div>
         </section>
 
         <!-- ============================ Features ============================ -->
         <section id="features" class="section">
-            <h2 class="section-title" data-i18n="aui.features.title">Everything, on one canvas</h2>
+            <h2 class="section-title" data-i18n="aui.features.title">One canvas, the whole lifecycle</h2>
             <div class="grid grid-3">
                 <div class="feature">
                     <h3 data-i18n="aui.f1t">Visual canvas</h3>
-                    <p data-i18n="aui.f1b">Drag resources onto the canvas and wire references between them. No boilerplate, no blank Program.cs to stare at.</p>
+                    <p data-i18n="aui.f1b">Drag resources onto the canvas and wire references in both directions. No boilerplate, no blank Program.cs to stare at.</p>
                 </div>
                 <div class="feature">
                     <h3 data-i18n="aui.f2t">Reflection-driven catalog</h3>
-                    <p data-i18n="aui.f2b">The "add resource" dialog is built from an intelligent capability catalog — new Aspire integrations show up automatically.</p>
+                    <p data-i18n="aui.f2b">The "add resource" dialog is built from an intelligent capability catalog — new Aspire integrations show up automatically, and composite "Setup" macros wire several resources at once.</p>
                 </div>
                 <div class="feature">
-                    <h3 data-i18n="aui.f3t">Live C# preview</h3>
-                    <p data-i18n="aui.f3b">The generated <code>Program.cs</code> stays in sync with the canvas, so you always see exactly the code you'll run.</p>
+                    <h3 data-i18n="aui.f3t">Real C# editor</h3>
+                    <p data-i18n="aui.f3b">A Monaco editor with Roslyn-backed IntelliSense shows the live <code>Program.cs</code>. Edit the code and it re-parses straight back into the graph.</p>
                 </div>
                 <div class="feature">
-                    <h3 data-i18n="aui.f4t">Run &amp; dashboard</h3>
-                    <p data-i18n="aui.f4b">Start and stop a stack from the UI, watch the run logs, and jump straight into the .NET Aspire dashboard.</p>
+                    <h3 data-i18n="aui.f4t">Live resources &amp; logs</h3>
+                    <p data-i18n="aui.f4b">While a stack runs, the canvas shows real per-resource status, endpoint URLs and the child resources each builder spawns — with per-resource console-log streaming.</p>
                 </div>
                 <div class="feature">
-                    <h3 data-i18n="aui.f5t">Publish to Docker Compose</h3>
-                    <p data-i18n="aui.f5b">Publish a stack via <code>aspire publish</code>: view the generated <code>docker-compose.yaml</code>, download the bundle, or deploy it locally.</p>
+                    <h3 data-i18n="aui.f5t">Run &amp; dashboard</h3>
+                    <p data-i18n="aui.f5b">Start and stop a stack from the UI and jump straight into the .NET Aspire dashboard.</p>
                 </div>
                 <div class="feature">
-                    <h3 data-i18n="aui.f6t">Import what you have</h3>
-                    <p data-i18n="aui.f6b">Bring an existing AppHost in from <code>.cs</code>, <code>.csproj</code> or a <code>.zip</code> — or start from a demo template.</p>
+                    <h3 data-i18n="aui.f6t">Publish anywhere</h3>
+                    <p data-i18n="aui.f6b">Publish via <code>aspire publish</code> to Docker Compose, Kubernetes (Helm), Azure Bicep or an Aspire manifest — view the artifact, download the bundle, or deploy Compose locally.</p>
                 </div>
                 <div class="feature">
-                    <h3 data-i18n="aui.f7t">Built-in AI assistant</h3>
-                    <p data-i18n="aui.f7b">Describe what you want and let the assistant build or modify the stack for you (bring your own OpenAI-compatible endpoint).</p>
+                    <h3 data-i18n="aui.f7t">Hosting — install &amp; forget</h3>
+                    <p data-i18n="aui.f7b">Deploy a stack as a persistent, tracked appliance with its own URL: start, stop, update and back it up from one place.</p>
                 </div>
                 <div class="feature">
-                    <h3 data-i18n="aui.f8t">Dockable workspace</h3>
-                    <p data-i18n="aui.f8b">Palette, canvas, properties, preview and logs are all dockable panels — arrange the workspace the way you like.</p>
+                    <h3 data-i18n="aui.f8t">139+ app store</h3>
+                    <p data-i18n="aui.f8b">A one-click app store (Umbrel / CasaOS style) with 139+ preconfigured containers — Immich, Jellyfin, Nextcloud, Gitea, n8n, Pi-hole and more.</p>
+                </div>
+                <div class="feature">
+                    <h3 data-i18n="aui.f9t">Import what you have</h3>
+                    <p data-i18n="aui.f9b">Bring in an existing AppHost from <code>.cs</code>, <code>.csproj</code>, a <code>.zip</code> — or a <code>docker-compose.yml</code>.</p>
+                </div>
+                <div class="feature">
+                    <h3 data-i18n="aui.f10t">Built-in AI assistant</h3>
+                    <p data-i18n="aui.f10b">Describe what you want and let the assistant build or modify the stack (bring your own OpenAI-compatible endpoint).</p>
+                </div>
+                <div class="feature">
+                    <h3 data-i18n="aui.f11t">Made to live in</h3>
+                    <p data-i18n="aui.f11b">Themes, a command palette (Ctrl/⌘+K), saveable dock layouts, undo/redo and dockable panels — arrange the workspace your way.</p>
+                </div>
+                <div class="feature">
+                    <h3 data-i18n="aui.f12t">API-first</h3>
+                    <p data-i18n="aui.f12b">The whole product is a REST API with an OpenAPI spec and a browsable Scalar reference — automate everything.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================ Hosting highlight ============================ -->
+        <section id="hosting" class="band section">
+            <h2 class="section-title">
+                <img class="aui-icon" src="../assets/aspireui-icon.svg" alt="" aria-hidden="true" />
+                <span data-i18n="aui.host.title">Not just build — host</span>
+            </h2>
+            <p class="section-lead" data-i18n="aui.host.lead">
+                AspireUI turns any stack into a self-hosted appliance. Install it once, get a URL, and manage it
+                like an app on your own box — no YAML archaeology, no manual container juggling.
+            </p>
+            <div class="grid grid-2">
+                <figure class="shot-frame">
+                    <img src="../assets/aspireui-hosting.png" alt="The AspireUI hosting tree view listing installed appliances." loading="lazy" />
+                    <figcaption class="shot-cap" data-i18n="aui.host.s1">Every hosted stack in one tree — start, stop, update, back up.</figcaption>
+                </figure>
+                <figure class="shot-frame">
+                    <img src="../assets/aspireui-hosting-env.png" alt="Editing environment variables of a hosted stack in AspireUI." loading="lazy" />
+                    <figcaption class="shot-cap" data-i18n="aui.host.s2">Tweak environment and config right from the hosting UI.</figcaption>
+                </figure>
+            </div>
+            <div class="grid grid-3">
+                <div class="mini">
+                    <h3 data-i18n="aui.host.c1t">One-click app store</h3>
+                    <p data-i18n="aui.host.c1b">Umbrel/CasaOS-style store — pick an app, click install, it's running.</p>
+                </div>
+                <div class="mini">
+                    <h3 data-i18n="aui.host.c2t">139+ apps ready</h3>
+                    <p data-i18n="aui.host.c2b">Immich, Jellyfin, Nextcloud, Gitea, n8n, Pi-hole… drop them on the canvas or install from the store.</p>
+                </div>
+                <div class="mini">
+                    <h3 data-i18n="aui.host.c3t">Install &amp; forget</h3>
+                    <p data-i18n="aui.host.c3b">Persistent, tracked, updatable appliances with backups — set it and move on.</p>
                 </div>
             </div>
         </section>
 
         <!-- ============================ Screenshots ============================ -->
-        <section class="band section">
+        <section class="section">
             <h2 class="section-title" data-i18n="aui.shots.title">See it in action</h2>
             <figure class="shot-frame">
-                <img src="../assets/aspireui-canvas.png" data-i18n-alt="aui.shot1"
-                     alt="Composing a stack on the AspireUI canvas with wired resources." loading="lazy" />
-                <figcaption class="shot-cap" data-i18n="aui.shot1">Compose and wire your resources on the canvas.</figcaption>
+                <img src="../assets/aspireui-live.png" alt="A running stack with live per-resource status on the canvas." loading="lazy" />
+                <figcaption class="shot-cap" data-i18n="aui.shot1">Live per-resource status while a stack runs.</figcaption>
             </figure>
             <figure class="shot-frame">
-                <img src="../assets/aspireui-preview.png" data-i18n-alt="aui.shot2"
-                     alt="The live Program.cs preview alongside the canvas." loading="lazy" />
-                <figcaption class="shot-cap" data-i18n="aui.shot2">The generated Program.cs updates live as you build.</figcaption>
+                <img src="../assets/aspireui-dashboard.png" alt="The .NET Aspire dashboard opened from AspireUI." loading="lazy" />
+                <figcaption class="shot-cap" data-i18n="aui.shot2">Jump straight into the .NET Aspire dashboard.</figcaption>
             </figure>
             <figure class="shot-frame">
-                <img src="../assets/aspireui-run.png" data-i18n-alt="aui.shot3"
-                     alt="Running a stack with logs and a link to the Aspire dashboard." loading="lazy" />
-                <figcaption class="shot-cap" data-i18n="aui.shot3">Run the stack, follow the logs, open the dashboard.</figcaption>
+                <img src="../assets/aspireui-catalog.png" alt="The add-resource dialog driven by the capability catalog." loading="lazy" />
+                <figcaption class="shot-cap" data-i18n="aui.shot3">Add resources from the reflection-driven catalog.</figcaption>
+            </figure>
+            <figure class="shot-frame">
+                <img src="../assets/aspireui-assistant.png" alt="The built-in AI assistant building a stack." loading="lazy" />
+                <figcaption class="shot-cap" data-i18n="aui.shot4">Let the built-in AI assistant build the stack for you.</figcaption>
             </figure>
         </section>
 
         <!-- ============================ Get started ============================ -->
         <section id="start" class="section cta">
             <h2 class="section-title" data-i18n="aui.start.title">Run it yourself</h2>
-            <p class="section-lead" data-i18n="aui.start.lead">Open source (self-hosted). Run it locally with the .NET SDK, or as a container on any Docker host.</p>
-            <p class="prereq" data-i18n="aui.start.prereq">Requires the .NET SDK 10.0+ and Docker (for running stacks).</p>
+            <p class="section-lead" data-i18n="aui.start.lead">Open source and self-hosted. One-click deploy to Azure, Render or Google Cloud to try it — or run the prebuilt image on any Docker host for the full Run &amp; Hosting features.</p>
+            <p class="prereq" data-i18n="aui.start.prereq">Self-hosting needs Docker (plus the .NET SDK 10.0+ for local dev). Run &amp; Hosting need the Docker socket.</p>
             <div class="cta-code">
-                <pre><code><span class="c-comment"># local dev — opens http://localhost:5158</span>
-<span class="c-prompt">$</span> dotnet run --project src/AspireUI.Server
+                <pre><code><span class="c-comment"># fastest — pull &amp; run the prebuilt image (opens http://localhost:8080)</span>
+<span class="c-prompt">$</span> docker run -d --name aspireui -p 8080:8080 \
+    -v aspireui-data:/data -v /var/run/docker.sock:/var/run/docker.sock \
+    ghcr.io/fgilde/aspireui:latest
 
-<span class="c-comment"># or self-host with Docker — opens http://localhost:8080</span>
-<span class="c-prompt">$</span> docker compose up -d --build</code></pre>
+<span class="c-comment"># or local dev with the .NET SDK (opens http://localhost:5158)</span>
+<span class="c-prompt">$</span> dotnet run --project src/AspireUI.Server</code></pre>
             </div>
             <div class="hero-cta" style="margin-top:28px">
-                <a class="btn btn-primary" href="https://github.com/fgilde/AspireUi" target="_blank" rel="noopener"
+                <a class="btn btn-primary" href="https://github.com/fgilde/AspireUI" target="_blank" rel="noopener"
                    data-i18n="aui.start.github">Get it on GitHub</a>
                 <a class="btn btn-ghost" href="https://fgilde.github.io/AspireUI/" target="_blank" rel="noopener"
                    data-i18n="aui.start.docs">Documentation</a>
@@ -177,10 +236,10 @@
     <footer class="footer">
         <div class="footer-left">
             <span class="brand-mark small">aspire<span class="heart">♥</span>love</span>
-            <span class="footer-note" data-i18n="aui.footer">AspireUI · visually build, import and run .NET Aspire AppHost projects.</span>
+            <span class="footer-note" data-i18n="aui.footer">AspireUI · visually build, run and host .NET Aspire AppHost projects.</span>
         </div>
         <div class="footer-right">
-            <a class="footer-link" href="https://github.com/fgilde/AspireUi" target="_blank" rel="noopener">
+            <a class="footer-link" href="https://github.com/fgilde/AspireUI" target="_blank" rel="noopener">
                 <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" fill="currentColor">
                     <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"></path>
                 </svg>
