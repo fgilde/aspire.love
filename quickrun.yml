@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://fgilde.github.io/QuickRun/quickrun.schema.json
+name: aspire.love
+description: "The command line tool, which runs everywhere. The WPF front end under src/AspireLove.Wpf is Windows-only and is not what this starts."
+
+requires:
+  - tool: dotnet
+    version: ">=10.0"
+    install: https://dotnet.microsoft.com/download
+
+setup:
+  - run: dotnet restore
+
+tasks:
+  - name: cli
+    run: dotnet run --project src/AspireLove.Cli -- --help
