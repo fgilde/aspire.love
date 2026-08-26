@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://fgilde.github.io/QuickRun/quickrun.schema.json
 name: aspire.love
-description: "The command line tool, which runs everywhere. The WPF front end under src/AspireLove.Wpf is Windows-only and is not what this starts."
+description: "The aspire.love Studio on Windows, the cross-platform CLI everywhere else. This repository generates an Aspire AppHost into a Lovable project; it is not an AppHost itself, so there is no dashboard to open."
 
 requires:
   - tool: dotnet
@@ -11,5 +11,9 @@ setup:
   - run: dotnet restore
 
 tasks:
-  - name: cli
-    run: dotnet run --project src/AspireLove.Cli -- --help
+  - name: studio
+    run:
+      windows: dotnet run --project src/AspireLove.Wpf
+      linux: dotnet run --project src/AspireLove.Cli -- --help
+      macos: dotnet run --project src/AspireLove.Cli -- --help
+    readyWhen: {window: true}
