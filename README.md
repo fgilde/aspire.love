@@ -11,6 +11,7 @@ No cloud lock-in. Switch to sync or remote whenever you like.
 If you like this tool please give us a star 🔆
 
 [![NuGet](https://img.shields.io/nuget/v/love.aspire.svg)](https://www.nuget.org/packages/love.aspire)
+[![QuickRun](https://quickrun.org/badge.svg)](https://quickrun.org/run?repo=fgilde/aspire.love)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](#license)
 
 </div>
